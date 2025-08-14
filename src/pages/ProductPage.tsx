@@ -126,7 +126,7 @@ const ProductPage = () => {
                     </div>
                   ))} */}
                   <div>
-                    <div className="text-sm font-medium text-muted-foreground">Sales Enablement</div>
+                    {/* <div className="text-sm font-medium text-muted-foreground">Sales Enablement</div> */}
                     <ul className="mt-2 space-y-2">
                       <li className="hover:text-primary transition-colors">
                         <a href="https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-Payroll-Intelligence-for-CFO.pdf"
@@ -144,7 +144,7 @@ const ProductPage = () => {
                     {/* <div className="text-lg font-semibold text-foreground">{product.marketOpportunity.tam}</div> */}
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-muted-foreground">Technical Resources</div>
+                    {/* <div className="text-sm font-medium text-muted-foreground">Technical Resources</div> */}
                     <ul className="mt-2 space-y-2">
                       <li className="hover:text-primary transition-colors">Solution Sheets</li>
                       <li className="hover:text-primary transition-colors">Use Cases</li>
