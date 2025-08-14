@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left items-center justify-items-center">
                     {/* Certificates */}
                     <div className="flex items-center justify-center md:justify-start">
-                        <img src='/src/assets/GDPR-1.png' alt="GDPR Certification" className="h-50 mx-auto md:mx-0" />
+                        <img src='/assets/GDPR-1.png' alt="GDPR Certification" className="h-50 mx-auto md:mx-0" />
                     </div>
 
                     {/* UK Address */}
