@@ -10,19 +10,33 @@ const Header = () => {
   const navigate = useNavigate();
   const { userRole, logout } = useAuth();
 
-  const navigation = userRole === "vc_admin" 
-  ? [
-      { name: "Products", href: "/products" },
-      { name: "About", href: "/about" },
-      { name: "Resources", href: "/resources" },
-      { name: "Contact", href: "/contact" },
-    ]
-  : [
-      { name: "Products", href: "/products" },
-      { name: "About", href: "/about" },
-      { name: "Resources", href: "/resources" },
-      { name: "Contact", href: "/contact" },
-    ];
+  const getNavigation = () => {
+    if (!userRole) {
+      // Not logged in - show only Contact
+      return [
+        // { name: "Contact", href: "/contact" },
+      ];
+    } else if (userRole === "vc_admin") {
+      // VC Admin - show VC specific navigation
+      return [
+        { name: "Products", href: "/vc-products" },
+        { name: "About", href: "/about" },
+        { name: "Resources", href: "/resources" },
+        { name: "Contact", href: "/contact" },
+      ];
+    } else if (userRole === "partner") {
+      // Partner - show Partner specific navigation
+      return [
+        { name: "Products", href: "/products" },
+        { name: "About", href: "/about" },
+        { name: "Resources", href: "/resources" },
+        { name: "Contact", href: "/contact" },
+      ];
+    }
+    return [];
+  };
+
+  const navigation = getNavigation();
 
   const isActive = (href: string) => {
     if (href.startsWith("/#")) return location.pathname === "/" && location.hash === href.substring(1);
