@@ -56,7 +56,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              {/* <Route path="/vc-products" element={
+              <Route path="/vc-products" element={
                 <ProtectedRoute>
                   <VCProductsPage />
                 </ProtectedRoute>
@@ -65,7 +65,7 @@ const App = () => {
                 <ProtectedRoute>
                   <VCProductDetailPage />
                 </ProtectedRoute>
-              } /> */}
+              } />
               <Route
                 path="/dashboard"
                 element={

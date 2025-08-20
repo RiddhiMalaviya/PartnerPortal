@@ -19,8 +19,8 @@ const Header = () => {
     } else if (userRole === "vc_admin") {
       // VC Admin - show VC specific navigation
       return [
-        { name: "Products", href: "/products" },
-        { name: "About", href: "/about" },
+        { name: "Products", href: "/vc-products" },
+        // { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
         { name: "Contact", href: "/contact" },
       ];
@@ -28,7 +28,7 @@ const Header = () => {
       // Partner - show Partner specific navigation
       return [
         { name: "Products", href: "/products" },
-        { name: "About", href: "/about" },
+        // { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
         { name: "Contact", href: "/contact" },
       ];
