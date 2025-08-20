@@ -19,7 +19,7 @@ const Header = () => {
     } else if (userRole === "vc_admin") {
       // VC Admin - show VC specific navigation
       return [
-        { name: "Products", href: "/vc-products" },
+        { name: "Products", href: "/products" },
         { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
         { name: "Contact", href: "/contact" },
