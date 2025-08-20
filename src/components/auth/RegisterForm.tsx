@@ -49,7 +49,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     // Log them in
     login("partner");
     onSuccess?.();
-    navigate("/homepage");
+    navigate("/dashboard");
   };
 
   return (
