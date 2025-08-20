@@ -10,12 +10,19 @@ const Header = () => {
   const navigate = useNavigate();
   const { userRole, logout } = useAuth();
 
-  const navigation = [
-    { name: "Products", href: "/#products" },
-    { name: "About", href: "/about" },
-    { name: "Resources", href: "/resources" },
-    { name: "Contact", href: "/contact" },
-  ];
+  const navigation = userRole === "vc_admin" 
+  ? [
+      { name: "Products", href: "/products" },
+      { name: "About", href: "/about" },
+      { name: "Resources", href: "/resources" },
+      { name: "Contact", href: "/contact" },
+    ]
+  : [
+      { name: "Products", href: "/products" },
+      { name: "About", href: "/about" },
+      { name: "Resources", href: "/resources" },
+      { name: "Contact", href: "/contact" },
+    ];
 
   const isActive = (href: string) => {
     if (href.startsWith("/#")) return location.pathname === "/" && location.hash === href.substring(1);
@@ -23,102 +30,134 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Clear the user role
-    navigate("/login"); // Redirect to login page
+    if (userRole === "vc_admin") {
+      logout();
+      navigate("/vc-homepage");
+    } else {
+      logout();
+      navigate("/");
+    }
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (userRole === "partner") {
+      navigate("/dashboard");
+    } else if (userRole === "vc_admin") {
+      navigate("/vc-dashboard");
+    } else {
+      navigate("/");
+    }
+  };
+
+  const handleVCAccess = () => {
+    navigate("/vc-homepage");
+  };
+
+  // ADD THIS MISSING RETURN STATEMENT
   return (
-    <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-border">
+    <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">EP</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">Enterprise Portal</span>
-          </Link>
+          <div className="flex-shrink-0">
+            <button onClick={handleLogoClick} className="flex items-center">
+              <div className="bg-blue-600 text-white rounded-lg p-2 mr-2">
+                <span className="font-bold text-lg">EP</span>
+              </div>
+              <span className="text-xl font-bold text-gray-900">Enterprise Portal</span>
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.href) ? "text-primary" : "text-muted-foreground"
-                }`}
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    isActive(item.href)
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-600 hover:text-blue-600"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          {/* Desktop CTA */}
+          {/* Right side buttons - THIS IS WHERE LOGOUT BUTTON SHOWS */}
           <div className="hidden md:flex items-center space-x-4">
-            {userRole ? (
+            {!userRole ? (
+              // When user is NOT logged in
               <>
-                <span className="text-sm font-medium text-muted-foreground">{userRole}</span>
-                <Button variant="outline" size="sm" onClick={handleLogout}>
-                  Logout
+                <Button size="sm" variant="outline" asChild>
+                  <Link to="/contact">Contact</Link>
                 </Button>
+                <Button onClick={handleVCAccess} className="bg-gradient-to-r from-primary to-primary-dark" size="sm">
+                  VC Access
+                </Button>
+                {/* <Button size="sm">Partner Login</Button> */}
               </>
             ) : (
-              <>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/login">Partner Login</Link>
+              // When user IS logged in (partner or vc_admin)
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  {userRole === "partner" ? "Partner" : userRole === "vc_admin" ? "VC Admin" : "User"}
+                </span>
+                <Button onClick={handleLogout} variant="outline" size="sm">
+                  Logout
                 </Button>
-                <Button size="sm" className="bg-gradient-to-r from-primary to-primary-dark" asChild>
-                  <Link to="/login">VC Access</Link>
-                </Button>
-              </>
+              </div>
             )}
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
+            <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-600 hover:text-blue-600"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card rounded-lg mt-2 shadow-lg border">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
-                  className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    isActive(item.href)
-                      ? "text-primary bg-accent"
-                      : "text-muted-foreground hover:text-primary hover:bg-accent"
-                  }`}
+                  to={item.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
-              <div className="px-3 py-2 space-y-2">
-                {userRole ? (
-                  <Button variant="outline" size="sm" className="w-full" onClick={handleLogout}>
-                    Logout
-                  </Button>
+              
+              {/* Mobile auth section */}
+              <div className="pt-4 pb-3 border-t border-gray-200">
+                {!userRole ? (
+                  <div className="space-y-2">
+                    <Button onClick={handleVCAccess} variant="outline" className="w-full">
+                      VC Access
+                    </Button>
+                    <Button className="w-full">Partner Login</Button>
+                  </div>
                 ) : (
-                  <>
-                    <Button variant="outline" size="sm" className="w-full" asChild>
-                      <Link to="/login" onClick={() => setIsMenuOpen(false)}>Partner Login</Link>
+                  <div className="space-y-2">
+                    <div className="px-3 py-2 text-sm text-gray-600">
+                      Logged in as: {userRole === "partner" ? "Partner" : "VC Admin"}
+                    </div>
+                    <Button onClick={handleLogout} variant="outline" className="w-full">
+                      Logout
                     </Button>
-                    <Button size="sm" className="w-full bg-gradient-to-r from-primary to-primary-dark" asChild>
-                      <Link to="/login" onClick={() => setIsMenuOpen(false)}>VC Access</Link>
-                    </Button>
-                  </>
+                  </div>
                 )}
               </div>
             </div>

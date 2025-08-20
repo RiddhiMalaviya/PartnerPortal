@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   video: string;
   slug: string;
+  category: string;
   overview: string;
   painPoints: string[];
   beneficiaries: string[];
@@ -31,6 +32,7 @@ export interface Product {
     title: string;
     type: string;
     gated: boolean;
+    urls: string;
   }>;
 }
 
@@ -43,6 +45,7 @@ export const products: Product[] = [
     image: "/assets/payroll-variance.jpg",
     video: "/assets/videoplayback.mp4",
     slug: "payroll-variance-analysis",
+    category: "Analytics",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
       "Manual payroll reconciliation consuming 40+ hours per pay period",
@@ -110,10 +113,15 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false },
-      { title: "ROI Calculator", type: "Tool", gated: false },
-      { title: "Implementation Guide", type: "PDF", gated: true },
-      { title: "Pricing & Packaging", type: "PDF", gated: true }
+      { title: "Product One-Pagers (Persona-specific)", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-Payroll-Intelligence-for-CFO.pdf" },
+      { title: "Proposal Deck", type: "Tool", gated: false, urls: "#" },
+      { title: "Demo Decks (Modular, vertical-specific)", type: "PDF", gated: true, urls: "#" },
+      { title: "BaBattlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)", type: "PDF", gated: true, urls: "https://pclnxai.com/wp-content/uploads/2025/04/Battlecard-PCL-nXAI-vs-Power-BI-Internal-Team.docx" },
+      { title: "Solution Sheets", type: "PDF", gated: true, urls: "#" },
+      { title: "Use Cases", type: "PDF", gated: true, urls: "#" },
+      { title: "Industry Packs (Retail, Healthcare, Pharma Finance)", type: "PDF", gated: true, urls: "#" },
+      { title: "Pricing & Packaging Playbook", type: "PDF", gated: true, urls: "#" },
+      { title: "Product Video Recording", type: "PDF", gated: true, urls: "https://pclnxai.com/wp-content/uploads/2025/04/Payroll-Variance-recording-final-1-1.mp4" },
     ]
   },
   {
@@ -124,6 +132,7 @@ export const products: Product[] = [
     image: "/assets/redwood-intelligence.jpg",
     video: "/assets/RedWood Intelligence Demo Tour.mp4",
     slug: "redwood-intelligence-suite",
+    category: "ERP",
     overview: "Redwood Intelligence Suite revolutionizes Oracle Cloud migrations by providing automated testing and impact analysis that traditionally takes months to complete. Our AI-powered platform ensures smooth transitions while minimizing business disruption and technical risks.",
     painPoints: [
       "Lengthy Oracle Redwood migrations taking 6-12 months",
@@ -191,13 +200,14 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Case Study: Accelerating Redwood Readiness", type: "PDF", gated: false },
-      { title: "Blog: The Essential Guide", type: "PDF", gated: false },
-      { title: "Whitepaper: Rethinking Testing in the Age of Oracle Redwood", type: "PDF", gated: false },
-      { title: "Traditional QA vs Redwood Intelligence: A Comparison", type: "PDF", gated: false },
-      { title: "Use Cases", type: "PDF", gated: false },
-      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "ZIP", gated: false },
-      { title: "Pricing & Packaging Playbook", type: "PDF", gated: true }
+      { title: "Case Study: Accelerating Redwood Readiness", type: "PDF", gated: false, urls: "https://pclnxai.com/case-study-accelerating-redwood-readiness-at-a-global-hr-organization/"  },
+      { title: "Blog: The Essential Guide", type: "PDF", gated: false, urls: "https://pclnxai.com/beyond-the-ui-why-redwood-transitions-demand-lifecycle-intelligence/"  },
+      { title: "Achieve Oracle Go-Live in Just 25 Days with Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/06/Achieve-Oracle-Go-Live-in-Just-25-Days.pdf"  },
+      { title: "Whitepaper: Rethinking Testing in the Age of Oracle Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/whitepapers/"  },
+      { title: "Traditional QA vs Redwood Intelligence: A Comparison", type: "PDF", gated: false, urls: "https://www.linkedin.com/posts/pclnxai_redwood-is-live-is-your-test-script-keeping-activity-7339222517397561348-tKS1?utm_source=share&utm_medium=member_desktop&rcm=ACoAACkcKf8ByDn5YgD4NXh_YrhAJ9dQgkm-lfw"  },
+      { title: "Use Cases", type: "ZIP", gated: false, urls: "link-to-use-cases"  },
+      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "ZIP", gated: false, urls: "link-to-industry-packs"  },
+      { title: "Pricing & Packaging Playbook", type: "PDF", gated: false, urls: "link-to-pricing-playbook" }
     ]
   },
   {
@@ -208,6 +218,7 @@ export const products: Product[] = [
     image: "/assets/people-analytics.jpg",
     video: "/assets/videoplayback (1).mp4",
     slug: "people-analytics-hub",
+    category: "HR",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
       "Manual payroll reconciliation consuming 40+ hours per pay period",
@@ -275,10 +286,14 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false },
-      { title: "ROI Calculator", type: "Tool", gated: false },
-      { title: "Implementation Guide", type: "PDF", gated: true },
-      { title: "Pricing & Packaging", type: "PDF", gated: true }
+      { title: "Product One-Pagers (Persona-specific)", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-HR-Intelligence-for-CHRO.pdf"  },
+      { title: "Proposal Deck", type: "Tool", gated: false, urls: "link-to-proposal-deck"  },
+      { title: "Demo Decks (Modular, vertical-specific)", type: "PDF", gated: true, urls: "link-to-demo-deck" },
+      { title: "Battlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)", type: "PDF", gated: true, urls: "https://pclnxai.com/wp-content/uploads/2025/04/Battlecard-PCL-nXAI-vs-OTBI.docx" },
+      { title: "Solution Sheets", type: "PDF", gated: true, urls: "link-to-solution-sheets" },
+      { title: "Use Cases", type: "PDF", gated: true, urls: "link-to-use-cases" },
+      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "PDF", gated: true, urls: "link-to-industry-packs" },
+      { title: "Pricing & Packaging Playbook", type: "PDF", gated: true, urls: "link-to-pricing-playbook" },
     ]
   },
   {
@@ -289,6 +304,7 @@ export const products: Product[] = [
     image: "/assets/lifecycle-intelligence.jpg",
     video: "/assets/videoplayback (2).mp4",
     slug: "lifecycle-intelligence",
+    category: "Finance",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
       "Manual payroll reconciliation consuming 40+ hours per pay period",
@@ -356,10 +372,14 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false },
-      { title: "ROI Calculator", type: "Tool", gated: false },
-      { title: "Implementation Guide", type: "PDF", gated: true },
-      { title: "Pricing & Packaging", type: "PDF", gated: true }
+      { title: "Blog: Reduce Oracle Project Rework", type: "PDF", gated: false, urls: "https://pclnxai.com/stop-oracle-rework-before-it-starts/"  },
+      { title: "Whitepaper: Lifecycle Intelligence in Oracle ERP", type: "Tool", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/05/PCLnXAI_Lifecycle_Whitepaper.pdf"  },
+      { title: "Article: Beyond Test Automation: The Case for Oracle Lifecycle Intelligence", type: "PDF", gated: true, urls: "https://www.linkedin.com/posts/pclnxai_oraclecloud-redwood-lifecycleintelligence-activity-7336371827935453184-viWI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAG8dogBgWRtjXj573MYH3krYDUaVak6UXQ&quot;" },
+      { title: "Requirement Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/requirement-intelligence/" },
+      { title: "Fit-Gap Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/fit-gap-intelligence/" },
+      { title: "Configuration Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/configuration-intelligence/" },
+      { title: " User Acceptance Testing Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/uat-intelligence/" },
+      { title: "Post-Go-Live Monitoring", type: "PDF", gated: true, urls: "https://pclnxai.com/post-go-live/" },
     ]
   },
   {
@@ -370,6 +390,7 @@ export const products: Product[] = [
     image: "/assets/one-finance.jpg",
     video: "/assets/videoplayback (3).mp4",
     slug: "one-finance",
+    category: "Intelligence",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
       "Manual payroll reconciliation consuming 40+ hours per pay period",
@@ -437,10 +458,15 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false },
-      { title: "ROI Calculator", type: "Tool", gated: false },
-      { title: "Implementation Guide", type: "PDF", gated: true },
-      { title: "Pricing & Packaging", type: "PDF", gated: true }
+      { title: "Data Alignment: The Key to Successful Finance Projects", type: "PDF", gated: false, urls: "https://pclnxai.com/onefinance/#"  },
+      { title: "Case Study: 40% Faster ERP Launch", type: "Tool", gated: false, urls: "https://pclnxai.com/onefinance/#"  },
+      { title: "FBDI Simplified – What Every Controller Should Know", type: "PDF", gated: true, urls: "https://pclnxai.com/onefinance/#" },
+      { title: "Battlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)", type: "PDF", gated: true, urls: "#" },
+      { title: "Solution Sheets", type: "PDF", gated: true, urls: "#" },
+      { title: "Use Cases", type: "PDF", gated: true, urls: "#" },
+      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "PDF", gated: true, urls: "#" },
+      { title: "Pricing & Packaging Playbook", type: "PDF", gated: true, urls: "#" },
+      { title: "Product Video Recording", type: "PDF", gated: true, urls: "#" },
     ]
   },
   {
@@ -451,6 +477,7 @@ export const products: Product[] = [
     image: "/assets/erp-insights.jpg",
     video: "/assets/videoplayback (4).mp4",
     slug: "erp-insights",
+    category: "Analytics",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
       "Manual payroll reconciliation consuming 40+ hours per pay period",
@@ -518,12 +545,12 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false },
-      { title: "ROI Calculator", type: "Tool", gated: false },
-      { title: "Implementation Guide", type: "PDF", gated: true },
-      { title: "Pricing & Packaging", type: "PDF", gated: true }
+      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false, urls: "#"  },
+      { title: "ROI Calculator", type: "Tool", gated: false, urls: "#"  },
+      { title: "Implementation Guide", type: "PDF", gated: true, urls: "#" },
+      { title: "Pricing & Packaging", type: "PDF", gated: true, urls: "#" }
     ]
-  },
+  }, //pending changes in links and resources
   // Additional products would follow the same pattern...
 ];
 
