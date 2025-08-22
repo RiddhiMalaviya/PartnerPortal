@@ -16,41 +16,97 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     name: "",
     email: "",
     company: "",
-    role: "",
+    jobRole: "", // Changed from 'role' to avoid confusion
     region: "",
     interest: "",
     acceptTerms: false,
-    userType: "partner",
   });
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = () => {
+    const requiredFields = ['name', 'email', 'company', 'jobRole', 'region', 'interest'];
     
+    for (const field of requiredFields) {
+      if (!formData[field as keyof typeof formData]) {
+        setError(`${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
+        return false;
+      }
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Please enter a valid email address");
+      return false;
+    }
+
     if (!formData.acceptTerms) {
       setError("Please accept the Terms & Conditions");
-      return;
+      return false;
     }
 
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    if (users.some((user: { email: string }) => user.email === formData.email)) {
-      setError("User already exists. Please sign in.");
-      return;
-    }
-
-    // Store new user with forced "partner" role
-    const userData = {
-      ...formData,
-      userType: "partner" // Ensure it's always "partner"
-    };
-    users.push(userData);
-    localStorage.setItem("users", JSON.stringify(users));
-    
-    // Log them in
-    login("partner");
-    onSuccess?.();
-    navigate("/dashboard");
+    return true;
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+    
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      
+      // Check if user already exists
+      if (users.some((user: { email: string }) => user.email === formData.email.toLowerCase().trim())) {
+        setError("An account with this email already exists. Please sign in instead.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Create consistent user data structure
+      const userData = {
+        id: `partner_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        name: formData.name.trim(),
+        email: formData.email.toLowerCase().trim(),
+        company: formData.company.trim(),
+        jobRole: formData.jobRole.trim(),
+        region: formData.region,
+        interest: formData.interest,
+        acceptTerms: formData.acceptTerms,
+        role: "partner", // ✅ This is what LoginForm checks for
+        userType: "partner", // ✅ Keep both for compatibility
+        tier: "Bronze",
+        createdAt: new Date().toISOString(),
+        lastLogin: new Date().toISOString()
+      };
+
+      // Store the new user
+      users.push(userData);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // Store current user session
+      localStorage.setItem("currentUser", JSON.stringify(userData));
+
+      // Auto-login
+      login("partner");
+      onSuccess?.();
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error("Registration error:", error);
+      setError("Registration failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const isFormComplete = formData.name && formData.email && formData.company && 
+                        formData.jobRole && formData.region && formData.interest && 
+                        formData.acceptTerms;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 py-2">
@@ -63,18 +119,19 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       
       <div className="grid gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="name">Full Name</Label>
+          <Label htmlFor="name">Full Name *</Label>
           <Input
             id="name"
             placeholder="John Doe"
             value={formData.name}
             onChange={(e) => setFormData({...formData, name: e.target.value})}
             required
+            disabled={isSubmitting}
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="email">Work Email</Label>
+          <Label htmlFor="email">Work Email *</Label>
           <Input
             id="email"
             type="email"
@@ -82,59 +139,70 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
+            disabled={isSubmitting}
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="company">Company Name</Label>
+          <Label htmlFor="company">Company Name *</Label>
           <Input
             id="company"
             placeholder="Company Ltd."
             value={formData.company}
             onChange={(e) => setFormData({...formData, company: e.target.value})}
             required
+            disabled={isSubmitting}
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="role">Role</Label>
+          <Label htmlFor="jobRole">Job Role *</Label>
           <Input
-            id="role"
-            placeholder="e.g. IT Director"
-            value={formData.role}
-            onChange={(e) => setFormData({...formData, role: e.target.value})}
+            id="jobRole"
+            placeholder="e.g. IT Director, CTO, Partner Manager"
+            value={formData.jobRole}
+            onChange={(e) => setFormData({...formData, jobRole: e.target.value})}
             required
+            disabled={isSubmitting}
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="region">Region</Label>
-          <Select onValueChange={(value) => setFormData({...formData, region: value})} required>
+          <Label htmlFor="region">Region *</Label>
+          <Select 
+            onValueChange={(value) => setFormData({...formData, region: value})} 
+            required
+            disabled={isSubmitting}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select your region" />
             </SelectTrigger>
             <SelectContent className="w-full z-50 bg-background">
-              <SelectItem value="us">United States</SelectItem>
-              <SelectItem value="uk">United Kingdom</SelectItem>
+              <SelectItem value="US">United States</SelectItem>
+              <SelectItem value="UK">United Kingdom</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="interest">Partnership Interest</Label>
-          <Select onValueChange={(value) => setFormData({...formData, interest: value})} required>
+          <Label htmlFor="interest">Partnership Interest *</Label>
+          <Select 
+            onValueChange={(value) => setFormData({...formData, interest: value})} 
+            required
+            disabled={isSubmitting}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select your interest" />
             </SelectTrigger>
             <SelectContent className="w-full z-50 bg-background">
-              <SelectItem value="implementation">Implementation Partner</SelectItem>
-              <SelectItem value="reseller">Reseller Partner</SelectItem>
-              <SelectItem value="strategic">Strategic Partner</SelectItem>
+              <SelectItem value="Implementation">Implementation Partner</SelectItem>
+              <SelectItem value="Reseller">Reseller Partner</SelectItem>
+              <SelectItem value="Strategic">Strategic Partner</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-start space-x-2 pt-2">
           <Checkbox 
             id="terms"
             checked={formData.acceptTerms}
@@ -142,15 +210,30 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
               setFormData({...formData, acceptTerms: checked as boolean})
             }
             required
+            disabled={isSubmitting}
           />
-          <Label htmlFor="terms" className="text-sm text-muted-foreground">
-            I accept the <a href="#" className="text-primary hover:underline">terms and conditions</a>
+          <Label htmlFor="terms" className="text-sm text-muted-foreground leading-5">
+            I accept the{" "}
+            <a href="#" className="text-primary hover:underline">
+              terms and conditions
+            </a>
           </Label>
         </div>
       </div>
 
-      <Button type="submit" className="w-full mt-6" disabled={!formData.acceptTerms}>
-        Create Partner Account
+      <Button 
+        type="submit" 
+        className="w-full mt-6" 
+        disabled={!isFormComplete || isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+            Creating Account...
+          </>
+        ) : (
+          "Create Partner Account"
+        )}
       </Button>
     </form>
   );
