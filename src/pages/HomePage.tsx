@@ -1,127 +1,201 @@
 import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/ProductCard";
 import { products, additionalProducts } from "@/data/products";
-import { ArrowRight, BarChart3, Settings, Users, Zap, DollarSign, TrendingUp } from "lucide-react";
-import Footer from "@/components/Footer";
+import { ArrowRight, BarChart3, Settings, Users, Zap, DollarSign, TrendingUp, Mail } from "lucide-react";
+import { useState } from "react"
+import AuthModal from "@/components/auth/AuthModal"
+import { Link, useNavigate } from "react-router-dom";
+import { useAutoPopup } from "@/hooks/useAutoPopup"; // Import the hook
+import { useAuth } from "@/context/AuthContext";
+import { FaLinkedin, FaYoutube } from "react-icons/fa6";
+import '@/styles/swiper.css';
+import ProductSwiper from "@/components/ProductSwiper";
 
 const productIcons = {
-  "payroll-variance": <BarChart3 className="h-6 w-6" />,
-  "redwood-intelligence": <Settings className="h-6 w-6" />,
-  "people-analytics": <Users className="h-6 w-6" />,
-  "lifecycle-intelligence": <Zap className="h-6 w-6" />,
-  "one-finance": <DollarSign className="h-6 w-6" />,
-  "erp-insights": <TrendingUp className="h-6 w-6" />
+    "payroll-variance": <BarChart3 className="h-6 w-6" />,
+    "redwood-intelligence": <Settings className="h-6 w-6" />,
+    "people-analytics": <Users className="h-6 w-6" />,
+    "lifecycle-intelligence": <Zap className="h-6 w-6" />,
+    "one-finance": <DollarSign className="h-6 w-6" />,
+    "erp-insights": <TrendingUp className="h-6 w-6" />
 };
 
 const HomePage = () => {
-  const allProducts = [...products, ...additionalProducts];
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [authModalTab, setAuthModalTab] = useState<"signin" | "signup">("signin");
+    const navigate = useNavigate();
+    const { userRole } = useAuth();
+    const allProducts = [...products, ...additionalProducts];
 
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      {/* <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5 pt-20 pb-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Enterprise Solutions for
-              <span className="bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
-                {" "}Partners & VCs
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Discover our comprehensive suite of enterprise HR and ERP solutions designed to accelerate 
-              digital transformation and drive measurable business outcomes for your clients.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-primary-dark text-lg px-8">
-                Explore Products
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                Schedule Demo
-              </Button>
-            </div>
-          </div>
-        </div>
-        
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl">Decorative elements</div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-      </section> */}
+    // Auto-popup hook - shows after 5 seconds for non-authenticated users
+    const {
+        showModal: showAutoPopup,
+        closeModal: closeAutoPopup,
+        dismissPermanently
+    } = useAutoPopup({
+        delay: 5000, // 5 seconds
+        showOnlyOnce: true
+    });
 
-      {/* Products Section */}
-      <section id="products" className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Product Portfolio
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Six powerful solutions designed to transform your enterprise operations, 
-              from payroll optimization to Oracle Cloud migrations.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                title={product.title!}
-                description={product.description!}
-                image={product.image!}
-                slug={product.slug!}
-                icon={productIcons[product.id as keyof typeof productIcons]}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+    const openAuthModal = (tab: "signin" | "signup" = "signin") => {
+        setAuthModalTab(tab);
+        setIsAuthModalOpen(true);
+    };
 
-      {/* Stats Section */}
-      {/* <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">500+</div>
-              <div className="text-muted-foreground">Enterprise Clients</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">$2.4B</div>
-              <div className="text-muted-foreground">Savings Delivered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">98.7%</div>
-              <div className="text-muted-foreground">Client Satisfaction</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">25</div>
-              <div className="text-muted-foreground">Day Avg. Implementation</div>
-            </div>
-          </div>
-        </div>
-      </section> */}
+    const closeAuthModal = () => {
+        setIsAuthModalOpen(false);
+    };
 
-      <Footer />
-      {/* CTA Section */}
-      {/* <section className="py-20 bg-gradient-to-r from-primary to-primary-dark">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8">
-            Join hundreds of enterprises who have accelerated their digital transformation with our solutions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8">
-              Request Partner Kit
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              View Investment Summary
-            </Button>
-          </div>
+    const handleAuthSuccess = () => {
+        closeAuthModal();
+        closeAutoPopup(); // Also close auto-popup if it's open
+        navigate("/dashboard");
+    };
+    const handleProductClick = (productId: string) => {
+        console.log('Product clicked:', productId); // Handle product click - navigate to details, open modal, etc.
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+            {/* Products Section */}
+            <section className="py-16 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            Our Product Suite
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto">
+                            Discover powerful solutions designed to transform your business operations.
+                            Hover over each product to explore features and benefits.
+                        </p>
+                    </div>
+
+                    <ProductSwiper
+                        onProductClick={handleProductClick}
+                        showPricing={true}
+                        slug="products"
+                    />
+                </div>
+            </section>
+
+            {/* Hero Section */}
+            <section className="relative py-20 px-6">
+                <div className="max-w-7xl mx-auto text-center">
+                    <h1 className="text-5xl font-bold text-gray-900 mb-6">
+                        Partner with PCLnXAI to transform HR & ERP
+                    </h1>
+                    <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                        Boost profitability with attractive partner margins.
+                        Accelerate client onboarding with ready-to-go solutions.
+                        Get marketing resources and technical enablement.
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <Button
+                            onClick={() => openAuthModal("signup")}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+                        >
+                            Become a Partner
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            className="px-8 py-3 text-lg"
+                            onClick={() => navigate("/products")}
+                        >
+                            Explore Products
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Partner Section */}
+            <section className="py-16 px-6 bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+                        Why Partner with Us?
+                    </h2>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                            <DollarSign className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                            <h3 className="text-xl font-semibold mb-3">Revenue & Margin</h3>
+                            <p className="text-gray-600">
+                                Boost profitability with attractive partner margins and recurring revenue opportunities.
+                            </p>
+                        </div>
+                        <div className="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                            <Zap className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                            <h3 className="text-xl font-semibold mb-3">Faster Time-to-Value</h3>
+                            <p className="text-gray-600">
+                                Accelerate client onboarding with ready-to-go solutions and proven methodologies.
+                            </p>
+                        </div>
+                        <div className="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                            <TrendingUp className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                            <h3 className="text-xl font-semibold mb-3">Co-Marketing & Support</h3>
+                            <p className="text-gray-600">
+                                Get marketing resources, technical enablement, and dedicated partner support.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Strip */}
+            <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+                <div className="max-w-4xl mx-auto text-center px-6">
+                    <h2 className="text-2xl font-bold mb-6">
+                        Ready to Start Your Partnership Journey?
+                    </h2>
+                    <div className="flex gap-4 justify-center ">
+                        <Button
+                            onClick={() => openAuthModal("signup")}
+                            className="bg-white text-blue-600 hover:bg-gray-100 hover:scale-110 px-8 py-3"
+                        >
+                            Become a Partner
+                        </Button>
+                        <Button variant="outline" className="border-white text-blue-600 hover:bg-gray-100 hover:scale-110 px-6 py-3">
+                            <Link to="/contact">Contact Partner Team</Link>
+                        </Button>
+                        {/* <Button
+                            variant="outline"
+                            className="border-white text-blue-600 hover:bg-gray-100 hover:scale-110 px-6 py-3"
+                        >
+                            Contact Partner Team
+                        </Button> */}
+                    </div>
+                    <div className="flex gap-6 justify-center mt-8">
+                        <a href="http://www.linkedin.com/company/nxaienterprisehcm" className="transform transition-transform duration-200 hover:scale-110">
+                            <FaLinkedin size={28} className="transition-opacity duration-200 hover:opacity-80" />
+                        </a>
+                        <a href="http://www.youtube.com/@pclnXAI" className="transform transition-transform duration-200 hover:scale-110">
+                            <FaYoutube size={28} className="transition-opacity duration-200 hover:opacity-80" />
+                        </a>
+                        <a href="mailto:mailto:%20info@pclnxai.com" className="transform transition-transform duration-200 hover:scale-110">
+                            <Mail size={28} className="transition-opacity duration-200 hover:opacity-80" />
+                        </a>
+                    </div>
+                    <div className="mt-8 flex flex-col items-center space-y-4">
+                        <div>
+                            <strong>Email us at </strong>
+                            <a href="mailto:info@pclnxai.com" className="hover:underline" target="_blank" rel="noreferrer noopener">info@pclnxai.com</a>
+                        </div>
+                        {/* <a href="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" data-type="link" data-id="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" className="hover:underline">Click here to see our Privacy Policy</a> */}
+                    </div>
+
+                    <div className="mt-8 text-center text-sm">
+                        <p> PCLnXAI is operated globally by Payroll Cloud Corp (US) and Payroll Cloud Limited (UK).
+                            All product offerings, support, and contracts will clearly indicate the responsible legal entity based on your region.
+                            © 2023 PCLnXAI. All rights reserved. All trademarks and registered trademarks are the property of their respective owners.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Manual Auth Modal */}
+            <AuthModal open={isAuthModalOpen} onClose={closeAuthModal} defaultTab={authModalTab} onSuccess={handleAuthSuccess} isAutoPopup={false} />
+            {/* Auto-popup Auth Modal - Only shows for non-authenticated users */}
+            <AuthModal open={showAutoPopup} onClose={closeAutoPopup} defaultTab="signup" onSuccess={handleAuthSuccess} isAutoPopup={true} onDismissPermanently={dismissPermanently} />
         </div>
-      </section> */}
-    </div>
-  );
+    );
 };
 
 export default HomePage;

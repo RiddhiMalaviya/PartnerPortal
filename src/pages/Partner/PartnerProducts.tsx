@@ -17,7 +17,7 @@ const productIcons = {
 
 const categories = ["All", "Analytics", "ERP", "HR", "Finance", "Intelligence"];
 
-const ProductsPage = () => {
+const PartnerProducts = () => {
   const allProducts = [...products, ...additionalProducts];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -86,4 +86,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default PartnerProducts;

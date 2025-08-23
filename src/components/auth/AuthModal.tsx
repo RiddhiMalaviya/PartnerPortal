@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import { X, Clock, Gift } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
 
 interface AuthModalProps {
     open: boolean
@@ -18,6 +18,8 @@ interface AuthModalProps {
 
 export default function AuthModal({ open, onClose, defaultTab = "signup", onSuccess, isAutoPopup = false, onDismissPermanently }: AuthModalProps) {
     const [activeTab, setActiveTab] = useState(defaultTab);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(open);
+    const navigate = useNavigate();
 
     // Reset to default tab whenever modal opens
     useEffect(() => {
@@ -25,6 +27,10 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
             setActiveTab(defaultTab);
         }
     }, [open, defaultTab]);
+
+    useEffect(() => {
+        setIsAuthModalOpen(open);
+    }, [open]);
 
     const handleSuccess = () => {
         onSuccess?.();
@@ -44,8 +50,15 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
         onClose();
     };
 
+    const handleAuthSuccess = () => {
+        setIsAuthModalOpen(false);
+        navigate("/"); // Redirect to homepage
+        onSuccess?.();
+        onClose();
+    };
+
     return (
-        <Dialog open={open} onOpenChange={handleClose}>
+        <Dialog open={isAuthModalOpen} onOpenChange={handleClose}>
             <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
                 {/* Special header for auto-popup */}
                 {isAutoPopup && (
@@ -103,11 +116,11 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
                     </TabsList>
 
                     <TabsContent value="signin" className="mt-0">
-                        <LoginForm onSuccess={handleSuccess} />
+                        <LoginForm onSuccess={handleAuthSuccess} />
                     </TabsContent>
 
                     <TabsContent value="signup" className="mt-0">
-                        <RegisterForm onSuccess={handleSuccess} />
+                        <RegisterForm onSuccess={handleAuthSuccess} />
                     </TabsContent>
                 </Tabs>
 

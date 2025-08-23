@@ -94,7 +94,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       // Auto-login
       login("partner");
       onSuccess?.();
-      navigate("/dashboard");
+      navigate("/homepage");
 
     } catch (error) {
       console.error("Registration error:", error);

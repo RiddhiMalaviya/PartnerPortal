@@ -23,6 +23,7 @@ const Header = () => {
         { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
         { name: "Contact", href: "/contact" },
+        { name: "Dashboard", href: "/dashboard" },
       ];
     }
     return [];
@@ -44,7 +45,7 @@ const Header = () => {
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (userRole === "partner") {
-      navigate("/dashboard");
+      navigate("/homepage");
     } else {
       navigate("/");
     }

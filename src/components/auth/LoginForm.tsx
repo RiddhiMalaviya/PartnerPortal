@@ -89,7 +89,7 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       
       login("partner");
       onSuccess?.();
-      navigate("/dashboard");
+      navigate("/homepage");
 
     } catch (error) {
       console.error("Login error:", error);

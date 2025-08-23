@@ -12,12 +12,12 @@ import Layout from "./pages/Layout";
 import ContactPage from "./pages/ContactPage";
 import ContactSuccess from "./components/contact/ContactSuccess";
 import PartnerDashboard from "./pages/Partner/PartnerDashboard";
-import ProductsPage from "./pages/Partner/ProductsPage";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
 import About from "./pages/About";
 import ResourcesPage from "./pages/Partner/ResourcesPage";
 import ProductDetail from '@/pages/ProductDetail';
+import PartnerProducts from "./pages/Partner/PartnerProducts";
 
 const queryClient = new QueryClient();
 
@@ -54,7 +54,7 @@ const App = () => {
                 path="/products"
                 element={
                   <ProtectedRoute>
-                    <ProductsPage />
+                    <PartnerProducts />
                   </ProtectedRoute>
                 }
               />

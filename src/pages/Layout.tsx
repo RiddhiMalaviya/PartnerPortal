@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/ProductCard";
 import { products, additionalProducts } from "@/data/products";
 import { ArrowRight, BarChart3, Settings, Users, Zap, DollarSign, TrendingUp, Mail } from "lucide-react";
 import { useState } from "react"
@@ -59,36 +58,6 @@ const Layout = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
             {/* Products Section */}
-            {/* <section className="py-16 px-6 bg-gray-50">
-                <div className="max-w-7xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
-                        Our Products
-                    </h2>
-                    <p className="text-center text-gray-600 mb-12">
-                        Discover powerful solutions for your clients
-                        <Button
-                            variant="link"
-                            onClick={() => openAuthModal("signup")}
-                            className="ml-2 p-0 h-auto text-blue-600 underline"
-                        >
-                            Sign up to learn more
-                        </Button>
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {allProducts.map((product) => (
-                            <ProductCard
-                                key={product.id}
-                                title={product.title!}
-                                description={product.description!}
-                                image={product.image!}
-                                slug={product.slug!}
-                                icon={productIcons[product.id as keyof typeof productIcons]}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section> */}
-
             <section className="py-16 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12">

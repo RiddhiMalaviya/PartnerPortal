@@ -10,7 +10,6 @@ interface ProductCardProps {
   image: string;
   slug: string;
   icon: React.ReactNode;
-  // onLearnMore: () => void;
 }
 
 const ProductCard = ({ title, description, image, slug, icon }: ProductCardProps) => {
@@ -46,31 +45,12 @@ const ProductCard = ({ title, description, image, slug, icon }: ProductCardProps
       
       <CardFooter className="px-6 pb-6">
         <Button asChild className="w-full group/btn" variant="outline">
-          <Link to={`/product/${slug}`} className="flex items-center justify-center gap-2">
+          <Link to={`/products/${slug}`} className="flex items-center justify-center gap-2">
             View Details
             <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
           </Link>
         </Button>
       </CardFooter>
-      {/* <CardFooter className="px-6 pb-6">
-        {userRole ? (
-          <Button asChild className="w-full group/btn" variant="outline">
-            <Link to={`/product/${slug}`} className="flex items-center justify-center gap-2">
-              View Details
-              <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-            </Link>
-          </Button>
-        ) : (
-          <Button 
-            className="w-full group/btn" 
-            variant="outline"
-            onClick={onLearnMore}
-          >
-            Learn more
-            <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
-          </Button>
-        )}
-      </CardFooter> */}
     </Card>
   );
 };

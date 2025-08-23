@@ -28,21 +28,35 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
     const navigate = useNavigate();
     const { userRole } = useAuth();
 
+    // const handleProductAction = (productId: string, action: string) => {
+    //     if (action === 'learn-more') {
+    //         const product = products.find(p => p.id === productId);
+    //         if (product && product.slug) {
+    //             if (userRole) {
+    //                 navigate(`/products/${product.slug}`); // User is logged in - go to full ProductDetail page
+    //             } else {
+    //                 navigate(`/product/${product.slug}`); // User is not logged in - go to limited ProductPage
+    //             }
+    //         } else {
+    //             console.error('Product or slug not found for id:', productId);
+    //         }
+    //     } else {
+    //         console.log(`${action} for product:`, productId);
+    //         onProductClick?.(productId);
+    //     }
+    // };
+    // In ProductSwiper.tsx - add temporary debugging
     const handleProductAction = (productId: string, action: string) => {
+        console.log('User Role:', userRole); // Should show "partner" when logged in
+        console.log('Product Action:', action, 'Product ID:', productId);
+
         if (action === 'learn-more') {
             const product = products.find(p => p.id === productId);
             if (product && product.slug) {
-                if (userRole) {
-                    navigate(`/products/${product.slug}`); // User is logged in - go to full ProductDetail page
-                } else {
-                    navigate(`/product/${product.slug}`); // User is not logged in - go to limited ProductPage
-                }
-            } else {
-                console.error('Product or slug not found for id:', productId);
+                const targetPath = userRole ? `/products/${product.slug}` : `/product/${product.slug}`;
+                console.log('Navigating to:', targetPath);
+                navigate(targetPath);
             }
-        } else {
-            console.log(`${action} for product:`, productId);
-            onProductClick?.(productId);
         }
     };
 
