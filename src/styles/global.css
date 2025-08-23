@@ -1,3 +1,36 @@
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/effect-coverflow';
+
+
+/* Hide the default Dialog close button - Multiple selectors for compatibility */
+.custom-dialog-content [data-radix-dialog-close] {
+  display: none !important;
+}
+
+.custom-dialog-content button[aria-label="Close"] {
+  display: none !important;
+}
+
+/* Additional selectors to ensure the default close button is hidden */
+[data-radix-dialog-content] > button[data-radix-dialog-close] {
+  display: none !important;
+}
+
+[data-radix-dialog-content] button[aria-label="Close"] {
+  display: none !important;
+}
+
+/* Target the close button in Dialog component specifically */
+.custom-dialog-content > button:first-child {
+  display: none !important;
+}
+
+/* Alternative approach - target by position */
+.custom-dialog-content > button[type="button"]:first-of-type {
+  display: none !important;
+}
 
 /* Smooth tab transitions */
 [data-radix-tabs-content] {
@@ -15,7 +48,6 @@
   }
 }
 
-/* Ensure proper tab content visibility */
 [data-state="active"] {
   display: block !important;
 }
@@ -24,19 +56,16 @@
   display: none !important;
 }
 
-/* Fix z-index issues */
 .z-50 {
   z-index: 50;
 }
 
-/* Ensure modal content doesn't overflow */
 [data-radix-dialog-content] {
   max-height: 90vh;
   overflow-y: auto;
 }
 
-/* Auto-popup entrance animation */
-@keyframes slideInFromTop {
+@keyframes slideInFromTop { /* Auto-popup entrance animation */
   from {
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
@@ -56,8 +85,7 @@
   }
 }
 
-/* Apply animation to auto-popup modals */
-[data-state="open"][data-auto-popup="true"] {
+[data-state="open"][data-auto-popup="true"] { /* Apply animation to auto-popup modals */
   animation: slideInFromTop 0.5s ease-out, pulseGlow 2s ease-in-out infinite;
 }
 

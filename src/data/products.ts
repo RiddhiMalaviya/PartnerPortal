@@ -1,3 +1,4 @@
+import { ArrowRight, BarChart3, Users, Settings, Zap, Shield, TrendingUp, Eye, Download, PlayCircle } from 'lucide-react';
 export interface Product {
   id: string;
   title: string;
@@ -6,6 +7,9 @@ export interface Product {
   image: string;
   video: string;
   slug: string;
+  icon: React.ElementType;
+  color: string;
+  clients?: string;
   category: string;
   overview: string;
   painPoints: string[];
@@ -45,6 +49,9 @@ export const products: Product[] = [
     image: "/assets/payroll-variance.jpg",
     video: "/assets/videoplayback.mp4",
     slug: "payroll-variance-analysis",
+    icon: BarChart3,
+    color: 'from-blue-500 to-blue-700',
+    clients: '500+ Companies',
     category: "Analytics",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
@@ -132,6 +139,9 @@ export const products: Product[] = [
     image: "/assets/redwood-intelligence.jpg",
     video: "/assets/RedWood Intelligence Demo Tour.mp4",
     slug: "redwood-intelligence-suite",
+    icon: Users,
+    color: 'from-green-500 to-green-700',
+    clients: '300+ Companies',
     category: "ERP",
     overview: "Redwood Intelligence Suite revolutionizes Oracle Cloud migrations by providing automated testing and impact analysis that traditionally takes months to complete. Our AI-powered platform ensures smooth transitions while minimizing business disruption and technical risks.",
     painPoints: [
@@ -218,6 +228,9 @@ export const products: Product[] = [
     image: "/assets/people-analytics.jpg",
     video: "/assets/videoplayback (1).mp4",
     slug: "people-analytics-hub",
+    icon: Settings,
+    color: 'from-purple-500 to-purple-700',
+    clients: '200+ Companies',
     category: "HR",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
@@ -304,6 +317,9 @@ export const products: Product[] = [
     image: "/assets/lifecycle-intelligence.jpg",
     video: "/assets/videoplayback (2).mp4",
     slug: "lifecycle-intelligence",
+    icon: Zap,
+    color: 'from-yellow-500 to-orange-600',
+    clients: '150+ Companies',
     category: "Finance",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
@@ -390,6 +406,9 @@ export const products: Product[] = [
     image: "/assets/one-finance.jpg",
     video: "/assets/videoplayback (3).mp4",
     slug: "one-finance",
+    icon: Shield,
+    color: 'from-red-500 to-red-700',
+    clients: '400+ Companies',
     category: "Intelligence",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
@@ -477,6 +496,9 @@ export const products: Product[] = [
     image: "/assets/erp-insights.jpg",
     video: "/assets/videoplayback (4).mp4",
     slug: "erp-insights",
+    icon: TrendingUp,
+    color: 'from-indigo-500 to-indigo-700',
+    clients: '350+ Companies',
     category: "Analytics",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [

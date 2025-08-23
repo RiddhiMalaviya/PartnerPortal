@@ -1,0 +1,76 @@
+/* Custom Swiper Styles */
+.product-swiper {
+  padding: 40px 20px;
+}
+
+.product-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.product-swiper .swiper-slide > div {
+  width: 100%;
+}
+
+/* Navigation Buttons */
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.product-swiper .swiper-button-next:after,
+.product-swiper .swiper-button-prev:after {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.product-swiper .swiper-button-next:hover,
+.product-swiper .swiper-button-prev:hover {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.product-swiper .swiper-button-next:hover:after,
+.product-swiper .swiper-button-prev:hover:after {
+  color: white;
+}
+
+/* Pagination */
+.product-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #d1d5db;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.product-swiper .swiper-pagination-bullet-active {
+  background: #3b82f6;
+  transform: scale(1.2);
+}
+
+/* Coverflow Effect Enhancement */
+.product-swiper .swiper-slide-shadow-left,
+.product-swiper .swiper-slide-shadow-right {
+  background-image: none;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-swiper {
+    padding: 20px 10px;
+  }
+  
+  .product-swiper .swiper-button-next,
+  .product-swiper .swiper-button-prev {
+    display: none;
+  }
+}

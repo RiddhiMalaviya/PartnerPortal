@@ -210,7 +210,7 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       </Button>
 
       {/* Show all registered emails for demo/testing purposes */}
-      {process.env.NODE_ENV === 'development' && allPartners.length > 0 && (
+      {/* {process.env.NODE_ENV === 'development' && allPartners.length > 0 && (
         <details className="mt-4">
           <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">
             View all registered emails ({allPartners.length})
@@ -223,7 +223,7 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
             ))}
           </div>
         </details>
-      )}
+      )} */}
     </div>
   );
 };

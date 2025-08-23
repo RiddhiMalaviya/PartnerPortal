@@ -17,7 +17,7 @@ import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
 import About from "./pages/About";
 import ResourcesPage from "./pages/Partner/ResourcesPage";
-
+import ProductDetail from '@/pages/ProductDetail';
 
 const queryClient = new QueryClient();
 
@@ -38,7 +38,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Layout />} />
               <Route path="/homepage" element={<HomePage />} />
-              <Route path="/product/:slug" element={<ProductPage />} />
 
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
@@ -59,14 +58,16 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              
+              <Route path="/product/:slug" element={<ProductPage />} />
+              <Route path="/products/:slug" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+
               <Route path="/resources" element={<ResourcesPage />} />
-              
+
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/contact/success" element={<ContactSuccess />} />
               <Route path="*" element={<NotFound />} />
-              
+
             </Routes>
           </Router>
         </AuthProvider>

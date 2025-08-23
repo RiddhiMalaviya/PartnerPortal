@@ -5,9 +5,11 @@ import { ArrowRight, BarChart3, Settings, Users, Zap, DollarSign, TrendingUp, Ma
 import { useState } from "react"
 import AuthModal from "@/components/auth/AuthModal"
 import { Link, useNavigate } from "react-router-dom";
-import { useAutoPopup } from "@/hooks/useAutoPopup"; // Import the hook
+import { useAutoPopup } from "@/hooks/useAutoPopup";
 import { useAuth } from "@/context/AuthContext";
 import { FaLinkedin, FaYoutube } from "react-icons/fa6";
+import ProductSwiper from '@/components/ProductSwiper';
+import '@/styles/swiper.css';
 
 const productIcons = {
     "payroll-variance": <BarChart3 className="h-6 w-6" />,
@@ -31,7 +33,7 @@ const Layout = () => {
         closeModal: closeAutoPopup,
         dismissPermanently
     } = useAutoPopup({
-        delay: 5000, // 5 seconds
+        delay: 5000,
         showOnlyOnce: true
     });
 
@@ -45,15 +47,19 @@ const Layout = () => {
     };
 
     const handleAuthSuccess = () => {
-        closeAuthModal();
-        closeAutoPopup(); // Also close auto-popup if it's open
+        // closeAuthModal();
+        closeAutoPopup();
         navigate("/dashboard");
+    };
+
+    const handleProductClick = (productId: string) => {
+        console.log('Product clicked:', productId); // Handle product click - navigate to details, open modal, etc.
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
             {/* Products Section */}
-            <section className="py-16 px-6 bg-gray-50">
+            {/* <section className="py-16 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">
                         Our Products
@@ -81,6 +87,26 @@ const Layout = () => {
                         ))}
                     </div>
                 </div>
+            </section> */}
+
+            <section className="py-16 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            Our Product Suite
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto">
+                            Discover powerful solutions designed to transform your business operations.
+                            Hover over each product to explore features and benefits.
+                        </p>
+                    </div>
+
+                    <ProductSwiper
+                        onProductClick={handleProductClick}
+                        showPricing={true}
+                        slug="products"
+                    />
+                </div>
             </section>
 
             {/* Hero Section */}
@@ -102,13 +128,13 @@ const Layout = () => {
                             Become a Partner
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Button>
-                        <Button
+                        {/* <Button
                             variant="outline"
                             className="px-8 py-3 text-lg"
                             onClick={() => openAuthModal("signin")}
                         >
                             Explore Products
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
             </section>

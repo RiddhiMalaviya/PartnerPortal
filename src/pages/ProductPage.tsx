@@ -1,296 +1,258 @@
-import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { products } from "@/data/products";
-import { ArrowRight, Download, Play, Users, TrendingUp, Target, FileText } from "lucide-react";
-import Footer from "@/components/Footer";
+// src/pages/ProductPage.tsx
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  ArrowLeft,
+  Play,
+  CheckCircle,
+  Phone,
+  Mail,
+  Video,
+  FileText,
+  ExternalLink,
+  Lock
+} from 'lucide-react';
+import { products } from '@/data/products';
+import AuthModal from '@/components/auth/AuthModal';
 
-const ProductPage = () => {
-  const { slug } = useParams();
-  const product = products.find(p => p.slug === slug);
+const ProductPage: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // Find product by slug from the products array
+  const product = slug ? products.find(p => p.slug === slug) : null;
+
+  useEffect(() => {
+    if (!product) {
+      navigate('/');
+    }
+  }, [product, navigate]);
 
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Product Not Found</h1>
-          <p className="text-muted-foreground">The product you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Product Not Found</h1>
+          <p className="text-gray-600">The product you're looking for doesn't exist.</p>
         </div>
       </div>
     );
   }
 
+  const handleGetMoreInfo = () => {
+    setIsAuthModalOpen(true);
+  };
+
+  const handleAuthSuccess = () => {
+    setIsAuthModalOpen(false);
+    navigate(`/products/${product!.slug}`, { replace: true }); // After successful auth, redirect to full product detail page
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/5 via-background to-accent/5 pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="relative bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          {/* Back Button */}
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="mb-6"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Button>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              <div className="flex items-center space-x-3 mb-4">
+                <Badge variant="secondary" className="text-sm">
+                  {product.category}
+                </Badge>
+              </div>
+
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 {product.title}
               </h1>
-              <p className="text-xl text-primary mb-6 font-medium">
+              <p className="text-xl text-blue-600 mb-6 font-medium">
                 {product.tagline}
               </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-gray-700 mb-8 leading-relaxed">
                 {product.description}
               </p>
-              {/* <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-primary-dark">
-                  <Play className="mr-2 h-5 w-5" />
-                  Watch Product Tour
+
+              {/* Limited Key Benefits */}
+              <div className="grid grid-cols-1 gap-4 mb-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">What We Provide:</h3>
+                {product.painPoints.slice(0, 3).map((benefit, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <CheckCircle className="h-5 w-5 text-green-600" />
+                    <span className="text-sm text-gray-700">{benefit}</span>
+                  </div>
+                ))}
+
+                {/* Show there's more content available */}
+                <div className="flex items-center space-x-2 opacity-60">
+                  <Lock className="h-5 w-5 text-gray-400" />
+                  <span className="text-sm text-gray-500">
+                    +{product.painPoints.length - 3} more benefits available
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  size="lg"
+                  onClick={handleGetMoreInfo}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  <Lock className="h-5 w-5 mr-2" />
+                  Get More Info
                 </Button>
-                <Button size="lg" variant="outline">
-                  Request Demo
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setIsAuthModalOpen(true)}
+                >
+                  <Mail className="h-5 w-5 mr-2" />
+                  Contact Sales
                 </Button>
-              </div> */}
+              </div>
             </div>
+
+            {/* Right Side - Demo Video */}
             <div className="relative">
-              <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-                {product.video ? (
-                  <video
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                  >
-                    <source src={product.video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Overview */}
-      <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold text-foreground mb-6">Business Overview</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                {product.overview}
-              </p>
-
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-foreground mb-4">Key Pain Points Solved</h3>
-                <ul className="space-y-3">
-                  {product.painPoints.map((point, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      <span className="text-muted-foreground">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">Who Benefits</h3>
-                <div className="flex flex-wrap gap-2">
-                  {product.beneficiaries.map((role, index) => (
-                    <Badge key={index} variant="secondary" className="px-3 py-1">
-                      <Users className="mr-1 h-3 w-3" />
-                      {role}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="mr-2 h-5 w-5 text-primary" />
-                    Available Resources
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {/* {(product.resources || []).map((resource, index) => (
-                    <div key={index}>
-                      <div className="text-sm font-medium text-muted-foreground">{resource.title}</div>
-                      <p className="text-xs text-muted-foreground mb-2">{resource.type}</p>
+              <Card className="overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative">
+                  {product.video ? (
+                    <video
+                      className="w-full h-full object-cover"
+                      controls
+                      poster={product.image}
+                    >
+                      <source src={product.video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <div className="text-center">
+                      <Video className="h-24 w-24 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-semibold text-gray-600">
+                        {product.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm mt-2">
+                        Demo video available
+                      </p>
                     </div>
-                  ))} */}
-                  <div>
-                    {/* <div className="text-sm font-medium text-muted-foreground">Sales Enablement</div> */}
-                    <ul className="mt-2 space-y-2">
-                      <li className="hover:text-primary transition-colors">
-                        <a href="https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-Payroll-Intelligence-for-CFO.pdf"
-                          className="hover:underline inline-block w-full"
-                        >Product One-Pagers (Persona-specific)</a>
-                      </li>
-                      <li className="hover:text-primary transition-colors">Proposal Deck</li>
-                      <li className="hover:text-primary transition-colors">Demo Decks (Modular, vertical-specific)</li>
-                      <li className="hover:text-primary transition-colors">
-                        <a href="https://pclnxai.com/wp-content/uploads/2025/04/Battlecard-PCL-nXAI-vs-Power-BI-Internal-Team.docx"
-                          className="hover:underline inline-block w-full"
-                        >BaBattlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)</a>
-                      </li>
-                    </ul>
-                    {/* <div className="text-lg font-semibold text-foreground">{product.marketOpportunity.tam}</div> */}
-                  </div>
-                  <div>
-                    {/* <div className="text-sm font-medium text-muted-foreground">Technical Resources</div> */}
-                    <ul className="mt-2 space-y-2">
-                      <li className="hover:text-primary transition-colors">Solution Sheets</li>
-                      <li className="hover:text-primary transition-colors">Use Cases</li>
-                      <li className="hover:text-primary transition-colors">Industry Packs (Retail, Healthcare, Pharma Finance)</li>
-                      <li className="hover:text-primary transition-colors">Pricing & Packaging Playbook</li>
-                      <li className="hover:text-primary transition-colors">
-                        <a href="https://pclnxai.com/wp-content/uploads/2025/04/Payroll-Variance-recording-final-1-1.mp4"
-                          className="hover:underline inline-block w-full"
-                        >Product Video Recording</a>
-                      </li>
-                    </ul>
-                    {/* <div className="text-lg font-semibold text-foreground">25 Days Average</div> */}
-                  </div>
-                  {/* <div>
-                    <div className="text-sm font-medium text-muted-foreground">ROI Timeline</div>
-                    <div className="text-lg font-semibold text-foreground">3-6 Months</div>
-                  </div> */}
-                </CardContent>
+                  )}
+                </div>
               </Card>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Key Features */}
-      <section className="py-16 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Key Business Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {product.keyFeatures.map((feature, index) => (
-              <Card key={index} className="h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-start">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-foreground font-medium">{feature}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Use Cases & Impact */}
-      {/* <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Use Cases & Impact</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {product.useCases.map((useCase, index) => (
-              <Card key={index} className="h-full">
-                <CardHeader>
-                  <CardTitle className="text-xl text-primary">{useCase.industry}</CardTitle>
-                  <CardDescription className="text-base">
-                    {useCase.scenario}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="border-l-4 border-success pl-4">
-                    <div className="text-sm font-medium text-success mb-1">Impact Delivered</div>
-                    <div className="text-foreground">{useCase.impact}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* Market Opportunity */}
-      {/* <section className="py-16 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-6">Market Opportunity</h2>
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-sm font-medium text-muted-foreground">TAM</div>
-                      <div className="text-lg font-bold text-primary">{product.marketOpportunity.tam}</div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-sm font-medium text-muted-foreground">SAM</div>
-                      <div className="text-lg font-bold text-primary">{product.marketOpportunity.sam}</div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4 text-center">
-                      <div className="text-sm font-medium text-muted-foreground">SOM</div>
-                      <div className="text-lg font-bold text-primary">{product.marketOpportunity.som}</div>
-                    </CardContent>
-                  </Card>
+              {/* Basic Stats */}
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-2xl font-bold text-gray-900">{product.clients}</div>
+                  <div className="text-sm text-gray-600">Trusted By</div>
+                </div>
+                <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                  <div className="text-2xl font-bold text-gray-900">24/7</div>
+                  <div className="text-sm text-gray-600">Support</div>
                 </div>
               </div>
             </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold text-foreground mb-4">Growth Trends</h3>
-              <ul className="space-y-3 mb-6">
-                {product.marketOpportunity.growthTrends.map((trend, index) => (
-                  <li key={index} className="flex items-start">
-                    <TrendingUp className="mr-2 h-4 w-4 text-success mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">{trend}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <h3 className="text-xl font-semibold text-foreground mb-4">Why Now?</h3>
-              <ul className="space-y-3">
-                {product.marketOpportunity.whyNow.map((reason, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 bg-warning rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-muted-foreground">{reason}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
-      {/* Resources */}
-      {/* <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Resources & Downloads</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {product.resources.map((resource, index) => (
-              <Card key={index} className="h-full hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <FileText className="h-8 w-8 text-primary mx-auto mb-4" />
-                  <h3 className="font-semibold text-foreground mb-2">{resource.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{resource.type}</p>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <Download className="mr-2 h-4 w-4" />
-                    {resource.gated ? "Partner Access" : "Download"}
-                  </Button>
+      {/* Limited Resources Section */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Available Resources
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Show only non-gated resources */}
+            {product.resources.filter(resource => !resource.gated).slice(0, 3).map((resource, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-3">
+                    <FileText className="h-6 w-6 text-blue-600 mt-1" />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-900 mb-1">{resource.title}</h4>
+                      <p className="text-sm text-gray-600 mb-3">{resource.type}</p>
+                      {resource.urls && resource.urls !== "#" ? (
+                        <a
+                          href={resource.urls}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-blue-600 hover:text-blue-700 text-sm"
+                        >
+                          View Resource
+                          <ExternalLink className="h-3 w-3 ml-1" />
+                        </a>
+                      ) : (
+                        <span className="text-xs text-gray-500">Available for download</span>
+                      )}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-        </div>
-      </section> */}
 
-      <Footer />
+          {/* Show there are more resources */}
+          <div className="text-center mt-8">
+            <Button
+              variant="outline"
+              onClick={handleGetMoreInfo}
+              className="text-blue-600 border-blue-600"
+            >
+              <Lock className="h-4 w-4 mr-2" />
+              View All Resources ({product.resources.length} total)
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-3xl font-bold mb-4">Want to Learn More?</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Register now to access detailed product information, full resources, and exclusive partner benefits.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-white text-blue-600 hover:bg-gray-100"
+              onClick={handleGetMoreInfo}
+            >
+              Register for Full Access
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-white text-blue-600 hover:bg-gray-100"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              <Phone className="h-5 w-5 mr-2" />
+              Contact Sales
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Auth Modal */}
+      <AuthModal
+        open={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        defaultTab="signup"
+        onSuccess={handleAuthSuccess}
+      />
     </div>
   );
 };

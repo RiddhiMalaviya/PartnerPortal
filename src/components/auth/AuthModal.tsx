@@ -60,14 +60,14 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
                                     <p className="text-sm text-blue-700">Start your journey with exclusive benefits</p>
                                 </div>
                             </div>
-                            <Button
+                            {/* <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={handleClose}
                                 className="text-blue-600 hover:text-blue-800"
                             >
                                 <X className="h-4 w-4" />
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
                 )}

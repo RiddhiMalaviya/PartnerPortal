@@ -15,12 +15,12 @@ const Header = () => {
     if (!userRole) {
       return [
         // { name: "About", href: "/about" },
-        { name: "Resources", href: "/resources" },
+        // { name: "Resources", href: "/resources" },
       ];
     } else if (userRole === "partner") {
       return [
         { name: "Products", href: "/products" },
-        // { name: "About", href: "/about" },
+        { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
         { name: "Contact", href: "/contact" },
       ];
