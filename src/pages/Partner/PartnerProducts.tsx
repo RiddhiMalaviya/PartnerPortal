@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, BarChart3, Settings, Users, Zap, DollarSign, TrendingUp } from "lucide-react";
 import Footer from "@/components/Footer";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+
 
 const productIcons = {
   "payroll-variance": <BarChart3 className="h-6 w-6" />,
@@ -61,18 +67,47 @@ const PartnerProducts = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Swiper
+            modules={[Scrollbar, Navigation]}
+            spaceBetween={24}
+            slidesPerView={'auto'}
+            scrollbar={{ 
+              draggable: true,
+              hide: false
+            }}
+            navigation={true}
+            className="!pb-12"
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 16,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+              1280: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+            }}
+          >
             {filteredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                title={product.title!}
-                description={product.description!}
-                image={product.image!}
-                slug={product.slug!}
-                icon={productIcons[product.id as keyof typeof productIcons]}
-              />
+              <SwiperSlide key={product.id} className="!w-80">
+                <ProductCard
+                  title={product.title!}
+                  description={product.description!}
+                  image={product.image!}
+                  slug={product.slug!}
+                  icon={productIcons[product.id as keyof typeof productIcons]}
+                />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">

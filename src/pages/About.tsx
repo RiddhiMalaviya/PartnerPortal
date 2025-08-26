@@ -13,6 +13,7 @@ import {
   MapPin,
   CheckCircle
 } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const About = () => {
   const stats = [
@@ -319,14 +320,14 @@ const About = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16 px-6 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-16 px-6 ">
+        <div className="w-full mx-auto text-center bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-2xl p-6 shadow-2xl">
           <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-white mb-8">
             Have questions about our solutions or want to learn more about partnership opportunities?
           </p>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          {/* <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div className="text-center">
               <MapPin className="h-8 w-8 mx-auto mb-3 text-blue-200" />
               <h3 className="font-semibold mb-2">Headquarters</h3>
@@ -354,14 +355,14 @@ const About = () => {
                 Retail & More
               </p>
             </div>
-          </div>
+          </div> */}
           
-          <p className="text-blue-100">
-            {/* Ready to transform your business? Contact us at <strong>info@pclnxai.com</strong> */}
+          <p className="text-white">
             Ready to transform your business? Contact us at <a href="mailto:info@pclnxai.com" className="hover:underline" target="_blank" rel="noreferrer noopener">info@pclnxai.com</a>
           </p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

@@ -67,6 +67,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                 spaceBetween={30}
                 slidesPerView={1}
                 navigation
+                loop={true}
                 pagination={{ clickable: true }}
                 autoplay={{
                     delay: 4000,

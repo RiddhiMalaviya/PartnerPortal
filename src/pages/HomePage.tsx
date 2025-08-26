@@ -9,6 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import { FaLinkedin, FaYoutube } from "react-icons/fa6";
 import '@/styles/swiper.css';
 import ProductSwiper from "@/components/ProductSwiper";
+import Footer from "@/components/Footer";
 
 const productIcons = {
     "payroll-variance": <BarChart3 className="h-6 w-6" />,
@@ -138,9 +139,10 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
 
             {/* CTA Strip */}
-            <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+            {/* <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
                 <div className="max-w-4xl mx-auto text-center px-6">
                     <h2 className="text-2xl font-bold mb-6">
                         Ready to Start Your Partnership Journey?
@@ -155,12 +157,6 @@ const HomePage = () => {
                         <Button variant="outline" className="border-white text-blue-600 hover:bg-gray-100 hover:scale-110 px-6 py-3">
                             <Link to="/contact">Contact Partner Team</Link>
                         </Button>
-                        {/* <Button
-                            variant="outline"
-                            className="border-white text-blue-600 hover:bg-gray-100 hover:scale-110 px-6 py-3"
-                        >
-                            Contact Partner Team
-                        </Button> */}
                     </div>
                     <div className="flex gap-6 justify-center mt-8">
                         <a href="http://www.linkedin.com/company/nxaienterprisehcm" className="transform transition-transform duration-200 hover:scale-110">
@@ -178,7 +174,6 @@ const HomePage = () => {
                             <strong>Email us at </strong>
                             <a href="mailto:info@pclnxai.com" className="hover:underline" target="_blank" rel="noreferrer noopener">info@pclnxai.com</a>
                         </div>
-                        {/* <a href="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" data-type="link" data-id="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" className="hover:underline">Click here to see our Privacy Policy</a> */}
                     </div>
 
                     <div className="mt-8 text-center text-sm">
@@ -188,7 +183,8 @@ const HomePage = () => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </section> */}
+            {/* <a href="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" data-type="link" data-id="https://pclnxai.com/wp-content/uploads/2025/03/Privacy-Policy-for-PCLnXAI.pdf" className="hover:underline">Click here to see our Privacy Policy</a> */}
 
             {/* Manual Auth Modal */}
             <AuthModal open={isAuthModalOpen} onClose={closeAuthModal} defaultTab={authModalTab} onSuccess={handleAuthSuccess} isAutoPopup={false} />

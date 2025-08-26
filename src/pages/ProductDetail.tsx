@@ -63,6 +63,12 @@ const ProductDetail: React.FC = () => {
     }
   };
 
+  const handleGetMoreInfo = () => {
+    const email = 'info@pclnxai.com';
+    const mailtoLink = `mailto:${email}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -112,7 +118,7 @@ const ProductDetail: React.FC = () => {
                 <Button 
                   size="lg"
                   className="bg-blue-600 hover:bg-blue-700 text-white"
-                  onClick={() => handleProtectedAction('contact')}
+                  onClick={() => navigate('/contact')}
                 >
                   <Phone className="h-5 w-5 mr-2" />
                   Contact Sales
@@ -120,7 +126,7 @@ const ProductDetail: React.FC = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  onClick={() => handleProtectedAction('info')}
+                  onClick={handleGetMoreInfo}
                 >
                   <Mail className="h-5 w-5 mr-2" />
                   Get More Info
@@ -397,7 +403,7 @@ const ProductDetail: React.FC = () => {
             <Button 
               size="lg"
               className="bg-white text-blue-600 hover:bg-gray-100 hover:scale-110"
-              onClick={() => handleProtectedAction('contact')}
+              onClick={() => navigate('/contact')}
             >
               <Phone className="h-5 w-5 mr-2" />
               Contact Sales Team
@@ -406,7 +412,7 @@ const ProductDetail: React.FC = () => {
               size="lg"
               variant="outline"
               className="bg-white text-blue-600 hover:bg-gray-100 hover:scale-110"
-              onClick={() => handleProtectedAction('info')}
+              onClick={handleGetMoreInfo}
             >
               <Mail className="h-5 w-5 mr-2" />
               Request Information
