@@ -7,6 +7,7 @@ import { Search, FileText, PlayCircle, Download, FileSpreadsheet, Filter } from 
 import Footer from "@/components/Footer";
 import TrainingPage from "./TrainingPage";
 import UseCasesPage from "./UseCasesPage";
+import EnablementPage from "./EnablementPage";
 
 const resourceTypes = ["All", "PDF", "Video", "Presentation", "Spreadsheet"];
 const categories = ["All", "Sales", "Technical", "Marketing", "Training"];
@@ -45,6 +46,7 @@ const ResourcesPage = () => {
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="training">Training & Certification</TabsTrigger>
             <TabsTrigger value="usecases">Use Cases</TabsTrigger>
+            <TabsTrigger value="enablement">Enablement</TabsTrigger>
           </TabsList>
 
           <TabsContent value="resources">
@@ -123,6 +125,10 @@ const ResourcesPage = () => {
 
           <TabsContent value="usecases">
             <UseCasesPage />
+          </TabsContent>
+
+          <TabsContent value="enablement">
+            <EnablementPage />
           </TabsContent>
         </Tabs>
       </div>

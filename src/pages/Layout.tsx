@@ -57,6 +57,45 @@ const Layout = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+            <section className="bg-gradient-to-r from-violet-100 via-violet-300 to-blue-500 py-20 md:py-32">
+                <div className="w-full mx-auto flex items-center justify-between gap-6 flex-col md:flex-row px-6">
+                    {/* Content - No button */}
+                    <div className="max-w-xl text-center md:text-left">
+                        <h2 className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent text-3xl md:text-5xl font-bold mb-5">
+                            Welcome to PCLnXAI Partner Portal
+                        </h2>
+                        <p className="text-blue-950 mb-4 text-base md:text-lg">
+                            Discover powerful Oracle Cloud solutions that transform HR and ERP operations.
+                        </p>
+                        <p className="text-blue-950 text-base md:text-lg">
+                            Join our thriving partner network and unlock exclusive benefits today!
+                        </p>
+                    </div>
+                    <div className="relative flex">
+                        <img 
+                            src="/assets/payroll-variance.jpg" 
+                            alt="Payroll Analytics" 
+                            className="w-32 h-32 md:w-34 md:h-34 lg:w-40 lg:h-40 rounded-md shadow-md hover:scale-110 transition-transform duration-300" 
+                        />
+                        <img 
+                            src="/assets/redwood-intelligence.jpg" 
+                            alt="Redwood Intelligence" 
+                            className="w-32 h-32 md:w-34 md:h-34 lg:w-40 lg:h-40 rounded-md shadow-md hover:scale-110 transition-transform duration-300" 
+                        />
+                        <img 
+                            src="/assets/people-analytics.jpg" 
+                            alt="People Analytics" 
+                            className="w-32 h-32 md:w-34 md:h-34 lg:w-40 lg:h-40 rounded-md shadow-md hover:scale-110 transition-transform duration-300" 
+                        />
+                        <img 
+                            src="/assets/lifecycle-intelligence.jpg" 
+                            alt="Lifecycle Intelligence" 
+                            className="w-32 h-32 md:w-34 md:h-34 lg:w-40 lg:h-40 rounded-md shadow-md hover:scale-110 transition-transform duration-300" 
+                        />
+                    </div>
+                </div>
+            </section>
+
             {/* Products Section */}
             <section className="py-16 px-6 bg-gray-50">
                 <div className="max-w-7xl mx-auto">

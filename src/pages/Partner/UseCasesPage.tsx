@@ -80,7 +80,7 @@ const UseCasesPage = () => {
           ))}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

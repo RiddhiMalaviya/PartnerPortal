@@ -110,7 +110,7 @@ const EnablementPage = () => {
           ))}
         </Tabs>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -22,6 +22,9 @@ const Header = () => {
         { name: "Products", href: "/products" },
         { name: "About", href: "/about" },
         { name: "Resources", href: "/resources" },
+        // { name: "Training", href: "/training" },    
+        // { name: "Enablement", href: "/enablement" },
+        // { name: "Use Cases", href: "/use-cases" },
         { name: "Contact", href: "/contact" },
         { name: "Dashboard", href: "/dashboard" },
       ];
@@ -53,7 +56,7 @@ const Header = () => {
 
   const getDisplayName = () => {
     if (currentUser?.name) {
-      return currentUser.name.split(' ')[0]; 
+      return currentUser.name.split(' ')[0];
     }
     return "Partner";
   };
@@ -95,8 +98,8 @@ const Header = () => {
                   key={item.name}
                   to={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium ${isActive(item.href)
-                      ? "text-blue-600 bg-blue-50"
-                      : "text-gray-600 hover:text-blue-600"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-600 hover:text-blue-600"
                     }`}
                 >
                   {item.name}
@@ -183,7 +186,7 @@ const Header = () => {
                         </div>
                       </div>
                     )}
-                    
+
                     <Link
                       to="/dashboard"
                       className="block w-full text-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md"
@@ -191,13 +194,13 @@ const Header = () => {
                     >
                       Dashboard
                     </Link>
-                    
-                    <Button 
+
+                    <Button
                       onClick={() => {
                         handleLogout();
                         setIsMenuOpen(false);
-                      }} 
-                      variant="outline" 
+                      }}
+                      variant="outline"
                       className="w-full"
                     >
                       Logout

@@ -105,7 +105,7 @@ const TrainingPage = () => {
           </div>
         </section>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

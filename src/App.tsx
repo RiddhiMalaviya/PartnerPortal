@@ -18,6 +18,9 @@ import About from "./pages/About";
 import ResourcesPage from "./pages/Partner/ResourcesPage";
 import ProductDetail from '@/pages/ProductDetail';
 import PartnerProducts from "./pages/Partner/PartnerProducts";
+// import TrainingPage from "./pages/Partner/TrainingPage";
+// import EnablementPage from "./pages/Partner/EnablementPage";
+// import UseCasesPage from "./pages/Partner/UseCasesPage";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +65,9 @@ const App = () => {
               <Route path="/products/:slug" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
 
               <Route path="/resources" element={<ResourcesPage />} />
+              {/* <Route path="/training" element={<ProtectedRoute><TrainingPage /></ProtectedRoute>} />
+              <Route path="/enablement" element={<ProtectedRoute><EnablementPage /></ProtectedRoute>} />
+              <Route path="/use-cases" element={<ProtectedRoute><UseCasesPage /></ProtectedRoute>} /> */}
 
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<ContactPage />} />
