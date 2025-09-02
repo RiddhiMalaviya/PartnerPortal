@@ -50,14 +50,25 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
         console.log('User Role:', userRole); // Should show "partner" when logged in
         console.log('Product Action:', action, 'Product ID:', productId);
 
-        if (action === 'learn-more') {
+        if (action === 'learn-more' || action === 'card-click') {
             const product = products.find(p => p.id === productId);
             if (product && product.slug) {
                 const targetPath = userRole ? `/products/${product.slug}` : `/product/${product.slug}`;
                 console.log('Navigating to:', targetPath);
                 navigate(targetPath);
             }
+        } else {
+            console.log(`${action} for product:`, productId);
+            onProductClick?.(productId);
         }
+    };
+
+    const handleCardClick = (productId: string, e: React.MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('button') || target.closest('a')) {
+            return; 
+        }
+        handleProductAction(productId, 'card-click');
     };
 
     return (
@@ -67,8 +78,8 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                 spaceBetween={30}
                 slidesPerView={1}
                 navigation
-                loop={true}
-                pagination={{ clickable: true }}
+                // loop={true}
+                // pagination={{ clickable: true }}
                 autoplay={{
                     delay: 4000,
                     disableOnInteraction: false,
@@ -113,6 +124,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                     }`}
                                 onMouseEnter={() => setHoveredProduct(product.id)}
                                 onMouseLeave={() => setHoveredProduct(null)}
+                                onClick={(e) => handleCardClick(product.id, e)}
                             >
                                 {/* Product Header */}
                                 <CardHeader className="relative overflow-hidden">
@@ -144,7 +156,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                         : 'opacity-0 max-h-0 transform translate-y-4 overflow-hidden'
                                         }`}>
                                         {/* Features */}
-                                        <div className="space-y-3">
+                                        <div className="space-y-3 mb-1">
                                             <h4 className="font-semibold text-gray-900 flex items-center">
                                                 <Settings className="h-4 w-4 mr-2 text-blue-600" />
                                                 Key Features
@@ -176,7 +188,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                         </div>
 
                                         {/* Pricing & Stats */}
-                                        {showPricing && (
+                                        {/* {showPricing && (
                                             <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                                                 <div>
                                                     <p className="text-xs text-gray-500">
@@ -184,10 +196,10 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                                     </p>
                                                 </div>
                                             </div>
-                                        )}
+                                        )} */}
 
                                         {/* Action Buttons */}
-                                        <div className="flex space-x-2 pt-3">
+                                        {/* <div className="flex space-x-2 pt-3">
                                             <Button
                                                 size="sm"
                                                 variant="outline"
@@ -197,11 +209,11 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                                 Learn More
                                                 <ArrowRight className="h-3 w-3 ml-1" />
                                             </Button>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     {/* Always Visible Bottom Section */}
-                                    <div className="pt-4 border-t border-gray-100">
+                                    {/* <div className="pt-4 border-t border-gray-100">
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center space-x-2">
                                                 <div className="flex -space-x-1">
@@ -219,7 +231,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </CardContent>
                             </Card>
                         </SwiperSlide>

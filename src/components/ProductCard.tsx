@@ -16,24 +16,24 @@ const ProductCard = ({ title, description, image, slug, icon }: ProductCardProps
   const { userRole } = useAuth();
 
   return (
-    <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
-      <CardHeader className="space-y-4">
+    <Card className="group h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 mx-auto max-w-full sm:max-w-md">
+      <CardHeader className="space-y-3 sm:space-y-4 px-4 sm:px-6">
         <div className="flex items-start justify-between">
-          <div className="p-3 bg-accent rounded-xl text-primary">
+          <div className="p-2 sm:p-3 bg-accent rounded-xl text-primary">
             {icon}
           </div>
         </div>
         <div>
-          <CardTitle className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+          <CardTitle className="text-lg sm:text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
             {title}
           </CardTitle>
-          <CardDescription className="mt-2 text-muted-foreground leading-relaxed">
+          <CardDescription className="mt-1 sm:mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
             {description}
           </CardDescription>
         </div>
       </CardHeader>
       
-      <CardContent className="px-6">
+      <CardContent className="px-4 sm:px-6">
         <div className="aspect-video rounded-lg overflow-hidden bg-muted">
           <img 
             src={image} 
@@ -43,11 +43,11 @@ const ProductCard = ({ title, description, image, slug, icon }: ProductCardProps
         </div>
       </CardContent>
       
-      <CardFooter className="px-6 pb-6">
-        <Button asChild className="w-full group/btn" variant="outline">
-          <Link to={`/products/${slug}`} className="flex items-center justify-center gap-2">
+      <CardFooter className="px-4 sm:px-6 pb-4 sm:pb-6">
+        <Button asChild className="w-full group/btn text-sm sm:text-base py-2 sm:py-2.5" variant="outline">
+          <Link to={`/products/${slug}`} className="flex items-center justify-center gap-1 sm:gap-2">
             View Details
-            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:translate-x-1" />
           </Link>
         </Button>
       </CardFooter>

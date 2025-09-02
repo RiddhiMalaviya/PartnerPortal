@@ -4,12 +4,12 @@ import { FaLinkedin, FaYoutube  } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#2155CD] text-white py-8">
+        <footer className="bg-[#2155CD] text-white py-6 sm:py-8">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left items-center justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center sm:text-left">
                     {/* Certificates */}
-                    <div className="flex items-center justify-center md:justify-start">
-                        <img src='/assets/GDPR-1.png' alt="GDPR Certification" className="h-50 mx-auto md:mx-0" />
+                    <div className="flex items-center justify-center sm:justify-start">
+                        <img src='/assets/GDPR-1.png' alt="GDPR Certification" className="h-24 sm:h-32 md:h-40 max-w-full object-contain mx-auto sm:mx-0" />
                     </div>
 
                     {/* UK Address */}
@@ -33,7 +33,7 @@ const Footer = () => {
                     </div>
                     
                     {/* Social Links & Contact */}
-                    <div className="flex space-x-6 justify-center md:justify-start">
+                    <div className="flex space-x-4 sm:space-x-6 items-center justify-center sm:justify-start">
                         <a href="http://www.linkedin.com/company/nxaienterprisehcm" className="transform transition-transform duration-200 hover:scale-110">
                             <FaLinkedin size={28} className="transition-opacity duration-200 hover:opacity-80" />
                         </a>
@@ -61,9 +61,6 @@ const Footer = () => {
                         All product offerings, support, and contracts will clearly indicate the responsible legal entity based on your region.
                         © 2023 PCLnXAI. All rights reserved. All trademarks and registered trademarks are the property of their respective owners.
                     </p>
-                    {/* <p className="mt-2">
-                        
-                    </p> */}
                 </div>
             </div>
         </footer>

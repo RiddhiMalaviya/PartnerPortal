@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import { products, additionalProducts } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,6 @@ import { Scrollbar, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
-
 
 const productIcons = {
   "payroll-variance": <BarChart3 className="h-6 w-6" />,
@@ -27,6 +27,7 @@ const PartnerProducts = () => {
   const allProducts = [...products, ...additionalProducts];
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const navigate = useNavigate(); // Add useNavigate hook
 
   const filteredProducts = allProducts.filter(product => {
     const matchesSearch = product.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -34,6 +35,18 @@ const PartnerProducts = () => {
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // Handle card click to navigate to ProductDetail
+  const handleCardClick = (product: any, e: React.MouseEvent) => {
+    // Prevent navigation if clicking on a button or link inside the card
+    const target = e.target as HTMLElement;
+    if (target.closest('button') || target.closest('a')) {
+      return;
+    }
+    
+    // Navigate to ProductDetail page (for registered users)
+    navigate(`/products/${product.slug}`);
+  };
 
   return (
     <section>
@@ -98,13 +111,19 @@ const PartnerProducts = () => {
           >
             {filteredProducts.map((product) => (
               <SwiperSlide key={product.id} className="!w-80">
-                <ProductCard
-                  title={product.title!}
-                  description={product.description!}
-                  image={product.image!}
-                  slug={product.slug!}
-                  icon={productIcons[product.id as keyof typeof productIcons]}
-                />
+                {/* Make entire card clickable */}
+                <div
+                  onClick={(e) => handleCardClick(product, e)}
+                  className="cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  <ProductCard
+                    title={product.title!}
+                    description={product.description!}
+                    image={product.image!}
+                    slug={product.slug!}
+                    icon={productIcons[product.id as keyof typeof productIcons]}
+                  />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

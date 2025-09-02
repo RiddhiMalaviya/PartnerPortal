@@ -26,7 +26,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
 
   const validateForm = () => {
     const requiredFields = ['name', 'email', 'company', 'jobRole', 'region', 'interest'];
-    
+
     for (const field of requiredFields) {
       if (!formData[field as keyof typeof formData]) {
         setError(`${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
@@ -51,7 +51,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     e.preventDefault();
     setError("");
     setIsSubmitting(true);
-    
+
     if (!validateForm()) {
       setIsSubmitting(false);
       return;
@@ -59,7 +59,7 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
 
     try {
       const users = JSON.parse(localStorage.getItem("users") || "[]");
-      
+
       // Check if user already exists
       if (users.some((user: { email: string }) => user.email === formData.email.toLowerCase().trim())) {
         setError("An account with this email already exists. Please sign in instead.");
@@ -77,8 +77,8 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         region: formData.region,
         interest: formData.interest,
         acceptTerms: formData.acceptTerms,
-        role: "partner", // ✅ This is what LoginForm checks for
-        userType: "partner", // ✅ Keep both for compatibility
+        role: "partner", 
+        userType: "partner", 
         tier: "Bronze",
         createdAt: new Date().toISOString(),
         lastLogin: new Date().toISOString()
@@ -104,80 +104,83 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
     }
   };
 
-  const isFormComplete = formData.name && formData.email && formData.company && 
-                        formData.jobRole && formData.region && formData.interest && 
-                        formData.acceptTerms;
+  const isFormComplete = formData.name && formData.email && formData.company &&
+    formData.jobRole && formData.region && formData.interest && formData.acceptTerms;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 py-2">
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 py-2 sm:py-4">
       {error && (
-        <Alert variant="destructive">
+        <Alert variant="destructive" className="text-xs sm:text-sm">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-      
-      <div className="grid gap-4">
+
+      <div className="grid gap-3 sm:gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="name">Full Name *</Label>
+          <Label htmlFor="name" className="text-sm sm:text-base">Full Name *</Label>
           <Input
             id="name"
             placeholder="John Doe"
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             disabled={isSubmitting}
+            className="text-sm sm:text-base py-2 sm:py-2.5"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="email">Work Email *</Label>
+          <Label htmlFor="email" className="text-sm sm:text-base">Work Email *</Label>
           <Input
             id="email"
             type="email"
             placeholder="john@company.com"
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
             disabled={isSubmitting}
+            className="text-sm sm:text-base py-2 sm:py-2.5"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="company">Company Name *</Label>
+          <Label htmlFor="company" className="text-sm sm:text-base">Company Name *</Label>
           <Input
             id="company"
             placeholder="Company Ltd."
             value={formData.company}
-            onChange={(e) => setFormData({...formData, company: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             required
             disabled={isSubmitting}
+            className="text-sm sm:text-base py-2 sm:py-2.5"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="jobRole">Job Role *</Label>
+          <Label htmlFor="jobRole" className="text-sm sm:text-base">Job Role *</Label>
           <Input
             id="jobRole"
             placeholder="e.g. IT Director, CTO, Partner Manager"
             value={formData.jobRole}
-            onChange={(e) => setFormData({...formData, jobRole: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, jobRole: e.target.value })}
             required
             disabled={isSubmitting}
+            className="text-sm sm:text-base py-2 sm:py-2.5"
           />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="region">Region *</Label>
-          <Select 
-            onValueChange={(value) => setFormData({...formData, region: value})} 
+          <Label htmlFor="region" className="text-sm sm:text-base">Region *</Label>
+          <Select
+            onValueChange={(value) => setFormData({ ...formData, region: value })}
             required
             disabled={isSubmitting}
           >
-            <SelectTrigger>
+            <SelectTrigger className="text-sm sm:text-base py-2 sm:py-2.5">
               <SelectValue placeholder="Select your region" />
             </SelectTrigger>
-            <SelectContent className="w-full z-50 bg-background">
+            <SelectContent className="w-full z-50 bg-background text-sm sm:text-base">
               <SelectItem value="US">United States</SelectItem>
               <SelectItem value="UK">United Kingdom</SelectItem>
             </SelectContent>
@@ -185,16 +188,16 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="interest">Partnership Interest *</Label>
-          <Select 
-            onValueChange={(value) => setFormData({...formData, interest: value})} 
+          <Label htmlFor="interest" className="text-sm sm:text-base">Partnership Interest *</Label>
+          <Select
+            onValueChange={(value) => setFormData({ ...formData, interest: value })}
             required
             disabled={isSubmitting}
           >
-            <SelectTrigger>
+            <SelectTrigger className="text-sm sm:text-base py-2 sm:py-2.5">
               <SelectValue placeholder="Select your interest" />
             </SelectTrigger>
-            <SelectContent className="w-full z-50 bg-background">
+            <SelectContent className="w-full z-50 bg-background text-sm sm:text-base">
               <SelectItem value="Implementation">Implementation Partner</SelectItem>
               <SelectItem value="Reseller">Reseller Partner</SelectItem>
               <SelectItem value="Strategic">Strategic Partner</SelectItem>
@@ -203,16 +206,16 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         </div>
 
         <div className="flex items-start space-x-2 pt-2">
-          <Checkbox 
+          <Checkbox
             id="terms"
             checked={formData.acceptTerms}
-            onCheckedChange={(checked) => 
-              setFormData({...formData, acceptTerms: checked as boolean})
+            onCheckedChange={(checked) =>
+              setFormData({ ...formData, acceptTerms: checked as boolean })
             }
             required
             disabled={isSubmitting}
           />
-          <Label htmlFor="terms" className="text-sm text-muted-foreground leading-5">
+          <Label htmlFor="terms" className="text-xs sm:text-sm text-muted-foreground leading-5">
             I accept the{" "}
             <a href="#" className="text-primary hover:underline">
               terms and conditions
@@ -221,9 +224,9 @@ const RegisterForm = ({ onSuccess }: { onSuccess?: () => void }) => {
         </div>
       </div>
 
-      <Button 
-        type="submit" 
-        className="w-full mt-6" 
+      <Button
+        type="submit"
+        className="w-full mt-4 sm:mt-6 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 text-sm sm:text-base py-2 sm:py-2.5"
         disabled={!isFormComplete || isSubmitting}
       >
         {isSubmitting ? (

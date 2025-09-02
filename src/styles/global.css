@@ -32,6 +32,10 @@
   display: none !important;
 }
 
+.section {
+  min-height: 100vh; /* ensures full screen, but grows with content */
+}
+
 /* Smooth tab transitions */
 [data-radix-tabs-content] {
   animation: fadeIn 0.2s ease-in-out;

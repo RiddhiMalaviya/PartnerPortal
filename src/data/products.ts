@@ -42,10 +42,110 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    id: "redwood-intelligence",
+    title: "Redwood Intelligence Suite",
+    tagline: "Accelerate Oracle Redwood transitions in 25 days",
+    description: "Accelerate your Oracle Redwood transition in just 25 days with automated testing, impact analysis, and seamless defect resolution—no production data required.",
+    image: "/assets/redwood-intelligence.jpg",
+    video: "/assets/RedWood Intelligence Demo Tour.mp4",
+    slug: "redwood-intelligence-suite",
+    icon: Users,
+    color: 'from-green-500 to-green-700',
+    clients: '300+ Companies',
+    category: "ERP",
+    overview: "Redwood Intelligence Suite revolutionizes Oracle Cloud migrations by providing automated testing and impact analysis that traditionally takes months to complete. Our AI-powered platform ensures smooth transitions while minimizing business disruption and technical risks.",
+    painPoints: [
+      "Lack of unified, real-time workforce insights",
+      "Inefficient tracking of attendance, productivity, and turnover",
+      "Difficulty in predicting future talent needs",
+      "Skills gaps and poor role alignment",
+      "Limited visibility into diversity and inclusion progress",
+      "Low internal mobility and unclear career paths",
+      "Ineffective or outdated performance management",
+      "Weak learning engagement tracking and skill development planning",
+      "Pay inequity and uncompetitive compensation structures",
+      "Low employee engagement and satisfaction visibility",
+      "Inability to measure ROI on HR initiatives",
+      "Manual, fragmented reporting processes",
+    ],
+    beneficiaries: ["HR leaders", "CHROs and C-level executives", "Talent acquisition teams", "Workforce planning managers", "Diversity, equity, and inclusion (DEI) teams", "Learning and development managers", "Compensation and benefits specialists", "People analytics teams", "Line managers and department heads"],
+    keyFeatures: [
+      "Workforce Monitoring",
+      "Talent Optimization",
+      "Skills & Role Alignment",
+      "Diversity & Inclusion",
+      "Career Pathing",
+      "Performance Feedback",
+      "Learning Analytics",
+      "Compensation Insights",
+      "Engagement Analysis",
+      "Advanced Analytics",
+    ],
+    useCases: [
+      {
+        industry: "Financial Services",
+        scenario: "Regional bank upgrading core Oracle systems with strict regulatory requirements",
+        impact: "Completed migration in 23 days with zero business disruption and 40% cost savings"
+      },
+      {
+        industry: "Higher Education",
+        scenario: "University system modernizing student information systems across multiple campuses",
+        impact: "Reduced testing phase from 4 months to 3 weeks while improving system performance by 60%"
+      },
+      {
+        industry: "Government",
+        scenario: "State agency upgrading legacy Oracle systems with minimal downtime requirements",
+        impact: "Achieved seamless migration with 99.9% uptime and enhanced security compliance"
+      }
+    ],
+    marketOpportunity: {
+      tam: "$8.4B Oracle Services Market",
+      sam: "$2.1B Oracle Migration Services",
+      som: "$420M Addressable Segment",
+      growthTrends: [
+        "22% annual growth in Oracle Cloud adoptions",
+        "Increasing demand for automated migration tools",
+        "Growing emphasis on reduced implementation risk"
+      ],
+      whyNow: [
+        "Oracle's push toward cloud-first architecture",
+        "End-of-life for legacy Oracle versions",
+        "Business pressure for digital transformation"
+      ]
+    },
+    competitiveAdvantage: [
+      {
+        feature: "25-Day Timeline",
+        competitor: "6-12 month implementations",
+        ourSolution: "Proven accelerated methodology with automated testing"
+      },
+      {
+        feature: "No Production Data",
+        competitor: "Requires production data access",
+        ourSolution: "Synthetic data generation for comprehensive testing"
+      },
+      {
+        feature: "AI Impact Analysis",
+        competitor: "Manual impact assessments",
+        ourSolution: "Automated risk detection and mitigation planning"
+      }
+    ],
+    resources: [
+      { title: "Case Study: Accelerating Redwood Readiness", type: "PDF", gated: false, urls: "https://pclnxai.com/case-study-accelerating-redwood-readiness-at-a-global-hr-organization/" },
+      { title: "Blog: The Essential Guide", type: "PDF", gated: false, urls: "https://pclnxai.com/beyond-the-ui-why-redwood-transitions-demand-lifecycle-intelligence/" },
+      { title: "Achieve Oracle Go-Live in Just 25 Days with Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/06/Achieve-Oracle-Go-Live-in-Just-25-Days.pdf" },
+      { title: "Whitepaper: Rethinking Testing in the Age of Oracle Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/whitepapers/" },
+      { title: "Traditional QA vs Redwood Intelligence: A Comparison", type: "PDF", gated: false, urls: "https://www.linkedin.com/posts/pclnxai_redwood-is-live-is-your-test-script-keeping-activity-7339222517397561348-tKS1?utm_source=share&utm_medium=member_desktop&rcm=ACoAACkcKf8ByDn5YgD4NXh_YrhAJ9dQgkm-lfw" },
+      { title: "Use Cases", type: "ZIP", gated: false, urls: "link-to-use-cases" },
+      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "ZIP", gated: false, urls: "link-to-industry-packs" },
+      { title: "Pricing & Packaging Playbook", type: "PDF", gated: false, urls: "link-to-pricing-playbook" }
+    ]
+  },
+  {
     id: "payroll-variance",
     title: "Payroll Variance Analysis",
     tagline: "Real-time payroll discrepancy detection and compliance assurance",
-    description: "Gain real-time visibility into payroll discrepancies, automate variance detection, and ensure compliance before payroll finalizes.",
+    description: "Gain real-time visibility into payroll discrepancies, automate variance detection, and ensure compliance before payroll finalize.",
     image: "/assets/payroll-variance.jpg",
     video: "/assets/videoplayback.mp4",
     slug: "payroll-variance-analysis",
@@ -55,20 +155,31 @@ export const products: Product[] = [
     category: "Analytics",
     overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
     painPoints: [
-      "Manual payroll reconciliation consuming 40+ hours per pay period",
-      "Late discovery of payroll errors resulting in costly corrections",
-      "Compliance violations due to oversight in complex regulations",
-      "Lack of visibility into payroll trends and patterns"
+      "Time-consuming variance checks",
+      "Unclear discrepancy causes",
+      "Risk of fines",
+      "Missed regulation changes",
+      "Overpayments and underpayments",
+      "Employee complaints",
+      "Payroll re-runs",
+      "Misallocated costs",
+      "Finance reconciliation delays",
+      "Recurring errors",
+      "Lack of proactive planning",
+      "Manual report preparation",
+      "Audit delays",
+      "Wasted time on low-impact issues",
+      "Missed high-risk items",
     ],
-    beneficiaries: ["Payroll Managers", "CFOs", "HR Directors", "Compliance Officers"],
+    beneficiaries: ["Payroll teams", "Finance", "HR", "Compliance officers", "Auditors", "Employees", "Accounting", "Finance leaders", "Leadership"],
     keyFeatures: [
-      "Real-time variance detection with instant alerts",
-      "Automated compliance checking across multiple jurisdictions",
-      "Predictive analytics for payroll trend identification",
-      "Seamless integration with existing HRIS systems",
-      "Comprehensive audit trails for regulatory reporting",
-      "Mobile dashboard for on-the-go monitoring",
-      "Customizable approval workflows"
+      "Faster, accurate variance resolution",
+      "Automated compliance risk prevention",
+      "Improved payroll calculation accuracy",
+      "Accurate cost allocation",
+      "Early issue detection and planning",
+      "Faster, transparent audit reporting",
+      "Focus on critical issues first",
     ],
     useCases: [
       {
@@ -132,99 +243,10 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "redwood-intelligence",
-    title: "Redwood Intelligence Suite",
-    tagline: "Accelerate Oracle Redwood transitions in 25 days",
-    description: "Accelerate your Oracle Redwood transition in just 25 days with automated testing, impact analysis, and seamless defect resolution—no production data required.",
-    image: "/assets/redwood-intelligence.jpg",
-    video: "/assets/RedWood Intelligence Demo Tour.mp4",
-    slug: "redwood-intelligence-suite",
-    icon: Users,
-    color: 'from-green-500 to-green-700',
-    clients: '300+ Companies',
-    category: "ERP",
-    overview: "Redwood Intelligence Suite revolutionizes Oracle Cloud migrations by providing automated testing and impact analysis that traditionally takes months to complete. Our AI-powered platform ensures smooth transitions while minimizing business disruption and technical risks.",
-    painPoints: [
-      "Lengthy Oracle Redwood migrations taking 6-12 months",
-      "High risk of business disruption during transitions",
-      "Extensive manual testing requirements",
-      "Lack of clear impact visibility before go-live"
-    ],
-    beneficiaries: ["IT Directors", "Oracle Administrators", "Project Managers", "CIOs"],
-    keyFeatures: [
-      "25-day migration timeline with proven methodology",
-      "Automated regression testing without production data",
-      "AI-powered impact analysis and risk assessment",
-      "Real-time defect tracking and resolution",
-      "Pre-built Oracle Redwood compatibility framework",
-      "Seamless rollback capabilities",
-      "Comprehensive training and change management"
-    ],
-    useCases: [
-      {
-        industry: "Financial Services",
-        scenario: "Regional bank upgrading core Oracle systems with strict regulatory requirements",
-        impact: "Completed migration in 23 days with zero business disruption and 40% cost savings"
-      },
-      {
-        industry: "Higher Education",
-        scenario: "University system modernizing student information systems across multiple campuses",
-        impact: "Reduced testing phase from 4 months to 3 weeks while improving system performance by 60%"
-      },
-      {
-        industry: "Government",
-        scenario: "State agency upgrading legacy Oracle systems with minimal downtime requirements",
-        impact: "Achieved seamless migration with 99.9% uptime and enhanced security compliance"
-      }
-    ],
-    marketOpportunity: {
-      tam: "$8.4B Oracle Services Market",
-      sam: "$2.1B Oracle Migration Services",
-      som: "$420M Addressable Segment",
-      growthTrends: [
-        "22% annual growth in Oracle Cloud adoptions",
-        "Increasing demand for automated migration tools",
-        "Growing emphasis on reduced implementation risk"
-      ],
-      whyNow: [
-        "Oracle's push toward cloud-first architecture",
-        "End-of-life for legacy Oracle versions",
-        "Business pressure for digital transformation"
-      ]
-    },
-    competitiveAdvantage: [
-      {
-        feature: "25-Day Timeline",
-        competitor: "6-12 month implementations",
-        ourSolution: "Proven accelerated methodology with automated testing"
-      },
-      {
-        feature: "No Production Data",
-        competitor: "Requires production data access",
-        ourSolution: "Synthetic data generation for comprehensive testing"
-      },
-      {
-        feature: "AI Impact Analysis",
-        competitor: "Manual impact assessments",
-        ourSolution: "Automated risk detection and mitigation planning"
-      }
-    ],
-    resources: [
-      { title: "Case Study: Accelerating Redwood Readiness", type: "PDF", gated: false, urls: "https://pclnxai.com/case-study-accelerating-redwood-readiness-at-a-global-hr-organization/"  },
-      { title: "Blog: The Essential Guide", type: "PDF", gated: false, urls: "https://pclnxai.com/beyond-the-ui-why-redwood-transitions-demand-lifecycle-intelligence/"  },
-      { title: "Achieve Oracle Go-Live in Just 25 Days with Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/06/Achieve-Oracle-Go-Live-in-Just-25-Days.pdf"  },
-      { title: "Whitepaper: Rethinking Testing in the Age of Oracle Redwood", type: "PDF", gated: false, urls: "https://pclnxai.com/whitepapers/"  },
-      { title: "Traditional QA vs Redwood Intelligence: A Comparison", type: "PDF", gated: false, urls: "https://www.linkedin.com/posts/pclnxai_redwood-is-live-is-your-test-script-keeping-activity-7339222517397561348-tKS1?utm_source=share&utm_medium=member_desktop&rcm=ACoAACkcKf8ByDn5YgD4NXh_YrhAJ9dQgkm-lfw"  },
-      { title: "Use Cases", type: "ZIP", gated: false, urls: "link-to-use-cases"  },
-      { title: "Industry Packs (Retail, Healthcare, Pharma, Finance)", type: "ZIP", gated: false, urls: "link-to-industry-packs"  },
-      { title: "Pricing & Packaging Playbook", type: "PDF", gated: false, urls: "link-to-pricing-playbook" }
-    ]
-  },
-  {
     id: "people-analytics",
     title: "People Analytics Hub",
-    tagline: "Empower HR leaders with real-time workforce insights",
-    description: "Empower HR leaders with real-time insights, no-code reporting, and seamless Oracle HCM integration to drive strategic decisions and workforce optimization.",
+    tagline: "Real-time workforce insights and analytics to empower HR leadership",
+    description: "Enable HR leaders to make smarter, faster, and more strategic decisions with prebuilt, cloud-native analytics. Gain actionable insights into attendance, productivity, talent management, diversity, compensation, and employee engagement — all integrated seamlessly with Oracle HCM.",
     image: "/assets/people-analytics.jpg",
     video: "/assets/videoplayback (1).mp4",
     slug: "people-analytics-hub",
@@ -232,22 +254,35 @@ export const products: Product[] = [
     color: 'from-purple-500 to-purple-700',
     clients: '200+ Companies',
     category: "HR",
-    overview: "Payroll Variance Analysis transforms how organizations manage payroll accuracy by providing real-time detection of discrepancies before they impact your bottom line. Our intelligent system continuously monitors payroll data, identifies anomalies, and ensures regulatory compliance across all jurisdictions.",
+    overview: "People Analytics Hub is a cloud-native, multilingual platform designed to give HR leaders and executives a complete, real-time view of their workforce. It unifies data across multiple HR processes — from talent acquisition to employee experience — into actionable dashboards and reports. With predictive analytics, diversity and inclusion tracking, career mobility analysis, and advanced reporting, it empowers organizations to improve retention, optimize workforce utilization, and create a thriving, high-performance workplace.",
     painPoints: [
-      "Manual payroll reconciliation consuming 40+ hours per pay period",
-      "Late discovery of payroll errors resulting in costly corrections",
-      "Compliance violations due to oversight in complex regulations",
-      "Lack of visibility into payroll trends and patterns"
+      "Lack of unified, real-time workforce visibility",
+      "Inability to track and act on attendance, productivity, and turnover trends",
+      "Difficulty predicting future talent needs",
+      "Skills gaps and poor role-to-skill alignment",
+      "Limited insight into diversity and inclusion progress",
+      "Low internal mobility and unclear career paths",
+      "Ineffective or outdated performance management",
+      "Low engagement with learning and development initiatives",
+      "Pay inequity and uncompetitive salary structures",
+      "Poor visibility into employee engagement and satisfaction levels",
+      "Inability to measure ROI of HR initiatives",
+      "Manual, fragmented reporting processes",
     ],
-    beneficiaries: ["Payroll Managers", "CFOs", "HR Directors", "Compliance Officers"],
+    beneficiaries: ["HR leaders", "CHROs and C-level executives", "Talent acquisition teams", "Workforce planning managers",
+      "Diversity, equity, and inclusion (DEI) teams", "Learning and development managers", "Compensation and benefits specialists",
+      "People analytics teams", "Line managers and department heads"],
     keyFeatures: [
-      "Real-time variance detection with instant alerts",
-      "Automated compliance checking across multiple jurisdictions",
-      "Predictive analytics for payroll trend identification",
-      "Seamless integration with existing HRIS systems",
-      "Comprehensive audit trails for regulatory reporting",
-      "Mobile dashboard for on-the-go monitoring",
-      "Customizable approval workflows"
+      "Workforce Monitoring",
+      "Talent Optimization",
+      "Skills & Role Alignment",
+      "Diversity & Inclusion",
+      "Career Pathing",
+      "Performance Feedback",
+      "Learning Analytics",
+      "Compensation Insights",
+      "Engagement & Sentiment",
+      "Advanced Analytics",
     ],
     useCases: [
       {
@@ -299,8 +334,8 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Product One-Pagers (Persona-specific)", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-HR-Intelligence-for-CHRO.pdf"  },
-      { title: "Proposal Deck", type: "Tool", gated: false, urls: "link-to-proposal-deck"  },
+      { title: "Product One-Pagers (a-specific)", type: "PDF", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/04/OnePager-PCL-nXAI-HR-Intelligence-for-CHRO.pdf" },
+      { title: "Proposal Deck", type: "Tool", gated: false, urls: "link-to-proposal-deck" },
       { title: "Demo Decks (Modular, vertical-specific)", type: "PDF", gated: true, urls: "link-to-demo-deck" },
       { title: "Battlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)", type: "PDF", gated: true, urls: "https://pclnxai.com/wp-content/uploads/2025/04/Battlecard-PCL-nXAI-vs-OTBI.docx" },
       { title: "Solution Sheets", type: "PDF", gated: true, urls: "link-to-solution-sheets" },
@@ -328,7 +363,8 @@ export const products: Product[] = [
       "Compliance violations due to oversight in complex regulations",
       "Lack of visibility into payroll trends and patterns"
     ],
-    beneficiaries: ["Payroll Managers", "CFOs", "HR Directors", "Compliance Officers"],
+    beneficiaries: ["Payroll Managers", "CFOs", "HR Directors", "Compliance Officers", "",
+      "", "", ""],
     keyFeatures: [
       "Real-time variance detection with instant alerts",
       "Automated compliance checking across multiple jurisdictions",
@@ -388,8 +424,8 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Blog: Reduce Oracle Project Rework", type: "PDF", gated: false, urls: "https://pclnxai.com/stop-oracle-rework-before-it-starts/"  },
-      { title: "Whitepaper: Lifecycle Intelligence in Oracle ERP", type: "Tool", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/05/PCLnXAI_Lifecycle_Whitepaper.pdf"  },
+      { title: "Blog: Reduce Oracle Project Rework", type: "PDF", gated: false, urls: "https://pclnxai.com/stop-oracle-rework-before-it-starts/" },
+      { title: "Whitepaper: Lifecycle Intelligence in Oracle ERP", type: "Tool", gated: false, urls: "https://pclnxai.com/wp-content/uploads/2025/05/PCLnXAI_Lifecycle_Whitepaper.pdf" },
       { title: "Article: Beyond Test Automation: The Case for Oracle Lifecycle Intelligence", type: "PDF", gated: true, urls: "https://www.linkedin.com/posts/pclnxai_oraclecloud-redwood-lifecycleintelligence-activity-7336371827935453184-viWI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAG8dogBgWRtjXj573MYH3krYDUaVak6UXQ&quot;" },
       { title: "Requirement Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/requirement-intelligence/" },
       { title: "Fit-Gap Intelligence", type: "PDF", gated: true, urls: "https://pclnxai.com/fit-gap-intelligence/" },
@@ -477,8 +513,8 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Data Alignment: The Key to Successful Finance Projects", type: "PDF", gated: false, urls: "https://pclnxai.com/onefinance/#"  },
-      { title: "Case Study: 40% Faster ERP Launch", type: "Tool", gated: false, urls: "https://pclnxai.com/onefinance/#"  },
+      { title: "Data Alignment: The Key to Successful Finance Projects", type: "PDF", gated: false, urls: "https://pclnxai.com/onefinance/#" },
+      { title: "Case Study: 40% Faster ERP Launch", type: "Tool", gated: false, urls: "https://pclnxai.com/onefinance/#" },
       { title: "FBDI Simplified – What Every Controller Should Know", type: "PDF", gated: true, urls: "https://pclnxai.com/onefinance/#" },
       { title: "Battlecards (e.g., OTBI vs. PCL nXAI, BI Teams vs. PCL)", type: "PDF", gated: true, urls: "#" },
       { title: "Solution Sheets", type: "PDF", gated: true, urls: "#" },
@@ -567,8 +603,8 @@ export const products: Product[] = [
       }
     ],
     resources: [
-      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false, urls: "#"  },
-      { title: "ROI Calculator", type: "Tool", gated: false, urls: "#"  },
+      { title: "Payroll Variance Solution Sheet", type: "PDF", gated: false, urls: "#" },
+      { title: "ROI Calculator", type: "Tool", gated: false, urls: "#" },
       { title: "Implementation Guide", type: "PDF", gated: true, urls: "#" },
       { title: "Pricing & Packaging", type: "PDF", gated: true, urls: "#" }
     ]

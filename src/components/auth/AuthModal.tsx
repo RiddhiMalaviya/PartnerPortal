@@ -12,7 +12,7 @@ interface AuthModalProps {
     onClose: () => void
     defaultTab?: "signin" | "signup"
     onSuccess?: () => void
-    isAutoPopup?: boolean // New prop to identify auto-popup
+    isAutoPopup?: boolean 
     onDismissPermanently?: () => void
 }
 
@@ -59,18 +59,18 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
 
     return (
         <Dialog open={isAuthModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[90vw] sm:w-[500px] max-h-[85vh] p-4 sm:p-6 overflow-y-auto">
                 {/* Special header for auto-popup */}
                 {isAutoPopup && (
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-t-lg -m-6 mb-4">
-                        <div className="flex items-center justify-between">
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-3 sm:p-4 rounded-t-lg -mx-4 -mt-4 mb-4">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
                             <div className="flex items-center space-x-2">
-                                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-500 rounded-full flex items-center justify-center">
                                     <Gift className="h-4 w-4 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-blue-900">Join Our Partner Network!</h3>
-                                    <p className="text-sm text-blue-700">Start your journey with exclusive benefits</p>
+                                    <h3 className="font-semibold text-blue-900 text-base sm:text-lg">Join Our Partner Network!</h3>
+                                    <p className="text-xs sm:text-sm text-blue-700">Start your journey with exclusive benefits</p>
                                 </div>
                             </div>
                             {/* <Button
@@ -85,7 +85,7 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
                     </div>
                 )}
                 <DialogHeader>
-                    <DialogTitle className="text-center text-2xl font-bold">
+                    <DialogTitle className="text-center text-xl sm:text-2xl font-bold">
                         {isAutoPopup
                             ? "Ready to Transform Your Business?"
                             : activeTab === "signin"
@@ -94,23 +94,19 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
                         }
                     </DialogTitle>
                     {isAutoPopup && (
-                        <p className="text-center text-gray-600 text-sm">
+                        <p className="text-center text-gray-600 text-xs sm:text-sm mt-2">
                             Join thousands of partners already growing their business with us
                         </p>
                     )}
                 </DialogHeader>
-                {/* <DialogHeader>
-                    <DialogTitle className="text-center text-2xl font-bold">
-                        {activeTab === "signin" ? "Welcome Back" : "Create Partner Account"}
-                    </DialogTitle>
-                </DialogHeader> */}
+                {/* <DialogHeader><DialogTitle className="text-center text-2xl font-bold">{activeTab === "signin" ? "Welcome Back" : "Create Partner Account"}</DialogTitle></DialogHeader> */}
 
                 <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-                    <TabsList className="grid w-full grid-cols-2 mb-6">
-                        <TabsTrigger value="signin" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                    <TabsList className="grid grid-cols-2 mb-4 sm:mb-6">
+                        <TabsTrigger value="signin" className="text-xs sm:text-sm py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                             Sign In
                         </TabsTrigger>
-                        <TabsTrigger value="signup" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                        <TabsTrigger value="signup" className="text-xs sm:text-sm py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                             Sign Up
                         </TabsTrigger>
                     </TabsList>
@@ -125,9 +121,9 @@ export default function AuthModal({ open, onClose, defaultTab = "signup", onSucc
                 </Tabs>
 
                 {isAutoPopup && (
-                    <div className="border-t pt-4 mt-4">
-                        <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center space-x-2 text-gray-500">
+                    <div className="border-t pt-3 sm:pt-4 mt-4">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs sm:text-sm">
+                            <div className="flex items-center space-x-2 text-gray-500 mb-2 sm:mb-0">
                                 <Clock className="h-4 w-4" />
                                 <span>This offer expires soon</span>
                             </div>

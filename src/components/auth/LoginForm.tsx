@@ -107,13 +107,13 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
 
   if (allPartners.length === 0) {
     return (
-      <div className="text-center py-8">
-        <div className="mb-6">
-          <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-            <User className="h-8 w-8 text-gray-400" />
+      <div className="text-center py-4 sm:py-6">
+        <div className="mb-4 sm:mb-6">
+          <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+            <User className="h-6 w-6 sm:h-8 sm:w-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Partner Accounts Found</h3>
-          <p className="text-gray-600">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">No Partner Accounts Found</h3>
+          <p className="text-gray-600 text-sm sm:text-base">
             No partner accounts exist yet. Please sign up to create your account.
           </p>
         </div>
@@ -122,22 +122,22 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   }
 
   return (
-    <div className="py-2">
-      <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Welcome Back!</h3>
-        <p className="text-gray-600">Enter your email to continue</p>
+    <div className="py-2 sm:py-4">
+      <div className="text-center mb-4 sm:mb-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Welcome Back!</h3>
+        <p className="text-gray-600 text-sm sm:text-base">Enter your email to continue</p>
       </div>
       
       {error && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert variant="destructive" className="mb-4 text-xs sm:text-sm">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="grid gap-2">
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="email" className="text-sm sm:text-base">Email Address</Label>
           <Input
             id="email"
             type="email"
@@ -146,27 +146,27 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
             onChange={handleEmailChange}
             onKeyPress={handleKeyPress}
             disabled={isLoading}
-            className="w-full"
+            className="w-full text-sm sm:text-base py-2 sm:py-2.5"
           />
         </div>
 
         {/* Show user details when email matches */}
         {showUserDetails && selectedUser && (
-          <div className="p-4 bg-green-50 rounded-lg border border-green-200 animate-in slide-in-from-top duration-200">
-            <div className="flex items-start space-x-3">
+          <div className="p-3 sm:p-4 bg-green-50 rounded-lg border border-green-200 animate-in slide-in-from-top duration-200">
+            <div className="flex items-start space-x-2 sm:space-x-3">
               <div className="flex-shrink-0">
-                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                  <User className="h-5 w-5 text-white" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-semibold text-green-900">Account Found!</h4>
-                <p className="text-sm text-green-800 font-medium">{selectedUser.name}</p>
-                <p className="text-sm text-green-700 flex items-center mt-1">
-                  <Building className="h-3 w-3 mr-1" />
-                  {selectedUser.company}
+                <p className="text-sm text-green-800 font-medium truncate">{selectedUser.name}</p>
+                <p className="text-xs sm:text-sm text-green-700 flex items-center mt-1">
+                  <Building className="h-3 w-3 sm:h-3 sm:w-3 mr-1" />
+                  <span className="truncate">{selectedUser.company}</span>
                 </p>
-                <p className="text-xs text-green-600 mt-1">
+                <p className="text-xs text-green-600 mt-1 truncate">
                   {selectedUser.interest} • {selectedUser.region}
                 </p>
               </div>
@@ -176,8 +176,8 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
 
         {/* Show suggestion if email doesn't match but there are similar emails */}
         {email && !selectedUser && email.length > 3 && (
-          <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
-            <p className="text-sm text-amber-800">
+          <div className="p-2 sm:p-3 bg-amber-50 rounded-lg border border-amber-200">
+            <p className="text-xs sm:text-sm text-amber-800">
               No account found with this email. 
               {allPartners.length > 0 && (
                 <span className="block mt-1 text-xs text-amber-600">
@@ -190,7 +190,7 @@ const LoginForm = ({ onSuccess }: { onSuccess?: () => void }) => {
       </div>
 
       <Button
-        className="w-full mt-6 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+        className="w-full mt-4 sm:mt-6 bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 text-sm sm:text-base py-2 sm:py-2.5"
         onClick={handleLogin}
         disabled={!selectedUser || isLoading}
       >
