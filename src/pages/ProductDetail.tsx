@@ -93,7 +93,7 @@ const ProductDetail: React.FC = () => {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
+              {/* <div className="flex flex-wrap gap-4">
                 <Button
                   size="lg"
                   className="bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:scale-105 transition"
@@ -111,7 +111,7 @@ const ProductDetail: React.FC = () => {
                   <Mail className="h-5 w-5 mr-2" />
                   Get More Info
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Video/Image */}
